@@ -25,7 +25,7 @@ $html_title = $settings->get('html_title');
     <div class="limiter">
         <div class="container">
             <main>
-                123
+                123456
             </main>
             <aside>
                 <div class="aside-title">
