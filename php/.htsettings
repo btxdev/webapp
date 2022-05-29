@@ -1,8 +1,8 @@
 db_host = 127.0.0.1
-db_user = dbmyapp
+db_user = webapp
 db_password = qQjmQa&72h7tLYN
-db_dbname = dbmyapp
+db_dbname = webapp
 db_encoding = utf8mb4
-html_title = myapp
+html_title = Web Application
 session_name = 3f25151745b7475cd97f774fe7e54fab
 session_hash_hardness = 20
