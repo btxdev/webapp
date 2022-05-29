@@ -25,7 +25,7 @@ $html_title = $settings->get('html_title');
     <div class="limiter">
         <div class="container">
             <div class="login-form">
-                <form action="" class="login-form__form">
+                <form class="login-form__form">
                     <span class="login-form__title">Авторизация</span>
                     <div class="login-form__input">
                         <input type="text" class="input" name="username" placeholder="Аккаунт">
@@ -36,7 +36,7 @@ $html_title = $settings->get('html_title');
                         <span class="focus-input"></span>
                     </div>
                     <div class="login-form__button">
-                        <button class="button">Логин</button>
+                        <button class="button">Вход</button>
                     </div>
                 </form>
             </div>

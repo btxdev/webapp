@@ -30,16 +30,42 @@ $html_title = $settings->get('html_title');
             <aside>
                 <div class="aside-title">
                     <div class="aside-title__logo"></div>
-                    <div class="aside-title__title"></div>
+                    <div class="aside-title__title">Панель управления</div>
                 </div>
+                <ul class="aside-ul">
+                    <li class="aside-li aside-li__focus">
+                        <div class="aside-li__icon"></div>
+                        <div class="aside-li__label">Сотрудники</div>
+                    </li>
+                    <li class="aside-li">
+                        <div class="aside-li__icon"></div>
+                        <div class="aside-li__label">Услуги</div>
+                    </li>
+                    <li class="aside-li">
+                        <div class="aside-li__icon"></div>
+                        <div class="aside-li__label">Договоры</div>
+                    </li>
+                    <li class="aside-li">
+                        <div class="aside-li__icon"></div>
+                        <div class="aside-li__label">Сделки</div>
+                    </li>
+                    <li class="aside-li">
+                        <div class="aside-li__icon"></div>
+                        <div class="aside-li__label">Недвижимость</div>
+                    </li>
+                    <li class="aside-li">
+                        <div class="aside-li__icon"></div>
+                        <div class="aside-li__label">Клиенты</div>
+                    </li>
+                </ul>
+                <div class="aside-line"></div>
                 <ul class="aside-ul">
                     <li class="aside-li">
                         <div class="aside-li__icon"></div>
-                        <div class="aside-li__label">Some text</div>
+                        <div class="aside-li__label">Администрирование</div>
                     </li>
                 </ul>
             </aside>
-
         </div>
     </div>
 </body>
