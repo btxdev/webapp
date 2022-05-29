@@ -37,7 +37,42 @@ $html_title = $settings->get('html_title');
                     </div>
                 </div>
                 <div class="content">
-                    1234
+                    <div class="page" id="employees">
+                        <table class="employees-table">
+                            <tr class="employees-table__title-row">
+                                    <td style="width: 20px;"><div class="title">#</div></td>
+                                    <td><div class="title">Имя</div></td>
+                                    <td><div class="title">Фамилия</div></td>
+                                    <td><div class="title">Отчество</div></td>
+                                    <td><div class="title">Должность</div></td>
+                                    <td style="width: 160px;"><div class="title"></div></td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20px;"><div class="field">1</div></td>
+                                <td><div class="field">Иван</div></td>
+                                <td><div class="field">Петров</div></td>
+                                <td><div class="field">Александрович</div></td>
+                                <td><div class="field">Агент по недвижимости</div></td>
+                                <td style="width: 160px;"><div class="button">Подробнее</div></td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20px;"><div class="field">2</div></td>
+                                <td><div class="field">Алексей</div></td>
+                                <td><div class="field">Иванов</div></td>
+                                <td><div class="field">Игоревич</div></td>
+                                <td><div class="field">Директор</div></td>
+                                <td style="width: 160px;"><div class="button">Подробнее</div></td>
+                            </tr>
+                            <tr class="employee">
+                                <td style="width: 20px;"><div class="field">3</div></td>
+                                <td><div class="field">Михаил</div></td>
+                                <td><div class="field">Корнишонов</div></td>
+                                <td><div class="field">Константинович</div></td>
+                                <td><div class="field">Бухгалтер</div></td>
+                                <td style="width: 160px;"><div class="button">Подробнее</div></td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
             </main>
             <aside>

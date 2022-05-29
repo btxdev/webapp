@@ -177,4 +177,47 @@ main {
 
 /* content start */
 
+/* employees content */
+
+.employees-table {
+    margin: 30px;
+    width: calc(100% - 60px);
+}
+.employees-table__title-row {
+    background-color: white;
+    border-radius: 8px;
+    margin: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.employees-table tr {
+    background-color: white;
+    border-radius: 8px;
+    margin: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.employees-table .title {
+    font-size: 14px;
+    color: #252733;
+    font-weight: bold;
+}
+.employees-table tr {
+    height: 40px;
+    width: 100%;
+}
+.employees-table td {
+    font-size: 14px;
+    color: #252733;
+    font-weight: 500;
+    width: 300px;
+    margin-left: 10px;
+}
+/* .employees-table .field {
+} */
+
 /* content end */
