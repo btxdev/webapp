@@ -25,7 +25,20 @@ $html_title = $settings->get('html_title');
     <div class="limiter">
         <div class="container">
             <main>
-                123456
+                <div class="header">
+                    <div class="header__title">Сотрудники</div>
+                    <div class="header__profile">
+                        <div class="header__username">admin</div>
+                        <div class="header__line"></div>
+                        <div class="header__name">Иван Петров</div>
+                        <div class="header__photo1">
+                            <div class="header__photo2"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="content">
+                    1234
+                </div>
             </main>
             <aside>
                 <div class="aside-title">
@@ -33,7 +46,7 @@ $html_title = $settings->get('html_title');
                     <div class="aside-title__title">Панель управления</div>
                 </div>
                 <ul class="aside-ul">
-                    <li class="aside-li aside-li__focus">
+                    <li class="aside-li aside-li_focused">
                         <div class="aside-li__icon"></div>
                         <div class="aside-li__label">Сотрудники</div>
                     </li>

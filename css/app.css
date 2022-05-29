@@ -78,10 +78,10 @@ main {
     align-items: center;
     cursor: pointer;
 }
-.aside-li:hover, .aside-li__focus {
+.aside-li:hover, .aside-li_focused {
     background-color: #9fa2b40e;
 }
-.aside-li:hover::after, .aside-li__focus::after {
+.aside-li:hover::after, .aside-li_focused::after {
     content: "";
     position: absolute;
     background-color: #DDE2FF;
@@ -113,3 +113,68 @@ main {
 }
 
 /* sidebar end */
+
+/* header start */
+
+.header {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-content: center;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 104px;
+    padding: 30px;
+}
+.header__title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #252733;
+}
+.header__profile {
+    display: flex;
+    align-items: center;
+}
+.header__username {
+    color: #252733;
+    font-size: 14px;
+    font-weight: normal;
+}
+.header__name {
+    color: #252733;
+    font-size: 14px;
+    font-weight: 600;
+}
+.header__line {
+    height: 28px;
+    width: 2px;
+    background-color: #DFE0EB;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.header__photo1 {
+    width: 44px;
+    height: 44px;
+    border-radius: 22px;
+    background-color: #DFE0EB;
+    margin-left: 14px;
+}
+.header__photo2 {
+    position: absolute;
+    margin-top: 2px;
+    margin-left: 2px;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: white;
+    background-image: url(../media/profile.webp);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+/* header end */
+
+/* content start */
+
+/* content end */
