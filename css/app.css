@@ -405,5 +405,15 @@ select {
     outline: none;
     height: 28px;
 }
+.popup-message {
+    font-size: 14px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    margin-right: 30px;
+}
+#popup-alert {
+    min-height: 100px;
+    width: 364px;
+}
 
 /* popup end */

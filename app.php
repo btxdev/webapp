@@ -116,9 +116,9 @@ $html_title = $settings->get('html_title');
 
                 </div>
 
-                <div id="shadow" style="display: none;"></div>
+                <div id="shadow"></div>
 
-                <div id="windows" style="display: none;">
+                <div id="windows">
 
                     <!-- Редактировать информацию о сотруднике -->
                     <div class="popup" id="popup-employee-edit" style="display: none;">
@@ -229,6 +229,14 @@ $html_title = $settings->get('html_title');
                             </tr>
                         </table>
                         <button class="popup-apply">Добавить</button>
+                        <button class="popup-cancel">Отмена</button>
+                    </div>
+
+                    <!-- Предупреждение -->
+                    <div class="popup" id="popup-alert">
+                        <div class="popup-title">Предупреждение</div>
+                        <p class="popup-message">Вы уверены, что хотите удалить услугу? <br><br> После удаления услуги, все связанные с услугой сделки также будут удалены.</p>
+                        <button class="popup-apply">Подтвердить</button>
                         <button class="popup-cancel">Отмена</button>
                     </div>
 
