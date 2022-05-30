@@ -346,6 +346,8 @@ main {
     transition: all 0.4s;
     opacity: 0;
     background-color: rgba(0,0,0,0.4);
+    overflow-y: scroll;
+    flex-wrap: wrap;
 }
 .popup {
     width: 600px;
@@ -357,6 +359,8 @@ main {
     transition: all 0.4s;
     z-index: 12;
     opacity: 0;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 .popup-title {
     display: inline-block;
@@ -497,3 +501,9 @@ select {
 }
 
 /* popup end */
+
+/* additional start */
+.w140 {
+    width: 140px !important;
+}
+/* additional end */

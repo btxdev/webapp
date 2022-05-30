@@ -153,7 +153,50 @@ $html_title = $settings->get('html_title');
                     <div class="page" id="apartments" style="display: none;"></div>
 
                     <!-- Клиенты -->
-                    <div class="page" id="clients" style="display: none;"></div>
+                    <div class="page" id="clients" style="display: none;">
+                        <div class="search">
+                            <input type="text" class="search__input" placeholder="Поиск">
+                            <button class="search__button">Найти</button>
+                        </div>
+                        <table class="employees-table services-table">
+                            <tr class="employees-table__title-row">
+                                <td style="width: 20px;"><div class="title">#</div></td>
+                                <td style="width: 150px;"><div class="title">Имя</div></td>
+                                <td style="width: 150px;"><div class="title">Фамилия</div></td>
+                                <td style="width: 150px;"><div class="title">Отчество</div></td>
+                                <td style="width: 150px;"><div class="title">Телефон</div></td>
+                                <td style="width: 150px;"><div class="title">Дата регистрации</div></td>
+                                <td style="width: 160px;"><div class="title"></div></td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20px;"><div class="field">1</div></td>
+                                <td style="width: 150px;"><div class="field">Иван</div></td>
+                                <td style="width: 150px;"><div class="field">Иванов</div></td>
+                                <td style="width: 150px;"><div class="field">Иванович</div></td>
+                                <td style="width: 150px;"><div class="field">+7 (800) 555 35 35</div></td>
+                                <td style="width: 150px;"><div class="field">01.01.2021</div></td>
+                                <td style="width: 160px;"><button onclick="openPopup('popup-client-edit')">Подробнее</button></td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20px;"><div class="field">2</div></td>
+                                <td style="width: 150px;"><div class="field">Иван</div></td>
+                                <td style="width: 150px;"><div class="field">Иванов</div></td>
+                                <td style="width: 150px;"><div class="field">Иванович</div></td>
+                                <td style="width: 150px;"><div class="field">+7 (800) 555 35 35</div></td>
+                                <td style="width: 150px;"><div class="field">01.01.2021</div></td>
+                                <td style="width: 160px;"><button onclick="openPopup('popup-client-edit')">Подробнее</button></td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20px;"><div class="field">3</div></td>
+                                <td style="width: 150px;"><div class="field">Иван</div></td>
+                                <td style="width: 150px;"><div class="field">Иванов</div></td>
+                                <td style="width: 150px;"><div class="field">Иванович</div></td>
+                                <td style="width: 150px;"><div class="field">+7 (800) 555 35 35</div></td>
+                                <td style="width: 150px;"><div class="field">01.01.2021</div></td>
+                                <td style="width: 160px;"><button onclick="openPopup('popup-client-edit')">Подробнее</button></td>
+                            </tr>
+                        </table>
+                    </div>
 
                     <!-- Администрирование -->
                     <div class="page" id="admin" style="display: none;"></div>
@@ -329,6 +372,60 @@ $html_title = $settings->get('html_title');
                         <p class="popup-p">Описание услуги</p>
                         <textarea class="popup-textarea">Прародителем текста-рыбы является известный "Lorem Ipsum" – латинский текст, ноги которого растут аж из 45 года до нашей эры. Сервисов по созданию случайного текста на основе Lorem Ipsum великое множество, однако все они имеют один существенный недостаток</textarea><br>
                         <button class="popup-apply">Добавить</button>
+                        <button class="popup-cancel" onclick="closePopup();">Отмена</button>
+                    </div>
+
+                    <!-- Редактировать информацию о клиенте -->
+                    <div class="popup" id="popup-client-edit" style="display: none;">
+                        <div class="popup-title">Информация о клиенте</div>
+                        <table class="popup-table">
+                            <tr>
+                                <td><span>Имя</span></td>
+                                <td><input type="text" value="Иван"></td>
+                            </tr>
+                            <tr>
+                                <td><span>Фамилия</span></td>
+                                <td><input type="text" value="Иванов"></td>
+                            </tr>
+                            <tr>
+                                <td><span>Отчество</span></td>
+                                <td><input type="text" value="Иванович"></td>
+                            </tr>
+                            <tr>
+                                <td><span>Телефон</span></td>
+                                <td><input type="text" value="+7 (800) 555 35 35"></td>
+                            </tr>
+                            <tr>
+                                <td><span>Адрес электронной почты</span></td>
+                                <td><input type="text" value="mail@site.ru"></td>
+                            </tr>
+                        </table>
+                        <p class="popup-p">Паспортные данные</p>
+                        <table class="popup-table">
+                            <tr>
+                                <td><span>Серия</span></td>
+                                <td><input type="number" value="1111"></td>
+                            </tr>
+                            <tr>
+                                <td><span>Номер</span></td>
+                                <td><input type="number" value="111111"></td>
+                            </tr>
+                            <tr>
+                                <td><span>Дата выдачи</span></td>
+                                <td><input type="date"></td>
+                            </tr>
+                            <tr>
+                                <td><span>Дата рождения</span></td>
+                                <td><input type="date"></td>
+                            </tr>
+                        </table>
+                        <p class="popup-p">Кем выдан</p>
+                        <textarea class="popup-textarea">Прародителем текста-рыбы является известный "Lorem Ipsum" – латинский текст, ноги которого растут аж из 45 года до нашей эры. Сервисов по созданию случайного текста на основе Lorem Ipsum великое множество, однако все они имеют один существенный недостаток</textarea><br>
+                        <p class="popup-p">Место рождения</p>
+                        <textarea class="popup-textarea">Прародителем текста-рыбы является известный "Lorem Ipsum" – латинский текст, ноги которого растут аж из 45 года до нашей эры. Сервисов по созданию случайного текста на основе Lorem Ipsum великое множество, однако все они имеют один существенный недостаток</textarea><br>
+                        <p class="popup-p">Адрес проживания</p>
+                        <textarea class="popup-textarea">Прародителем текста-рыбы является известный "Lorem Ipsum" – латинский текст, ноги которого растут аж из 45 года до нашей эры. Сервисов по созданию случайного текста на основе Lorem Ipsum великое множество, однако все они имеют один существенный недостаток</textarea><br>
+                        <button class="popup-apply">Сохранить</button>
                         <button class="popup-cancel" onclick="closePopup();">Отмена</button>
                     </div>
 
