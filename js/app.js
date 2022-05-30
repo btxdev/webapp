@@ -1,11 +1,4 @@
-const shadow = visible => {
-    let shadowParam = visible ? 'block' : 'none';
-    let windowsParam = visible ? 'flex' : 'none';
-    document.getElementById('shadow').style.display = shadowParam;
-    document.getElementById('windows').style.display = windowsParam;
-}
-
-
+const POPUP_TIME = 500;
 
 const openPage = page => {
 
@@ -62,3 +55,73 @@ const openPage = page => {
     })
 
 }
+
+const shadow = visible => {
+    return new Promise((resolve, reject) => {
+        //let shadowParam = visible ? 'block' : 'none';
+        let windowsParam = visible ? 'flex' : 'none';
+        if(visible) {
+            //document.getElementById('shadow').style.display = shadowParam;
+            document.getElementById('windows').style.display = windowsParam;
+            //document.getElementById('shadow').style.opacity = 1;
+            document.getElementById('windows').style.opacity = 1;
+            setTimeout(() => {
+                resolve();
+            }, POPUP_TIME);
+            
+        }
+        else {
+            //document.getElementById('shadow').style.opacity = 0;
+            document.getElementById('windows').style.opacity = 0;
+            setTimeout(() => {
+                //document.getElementById('shadow').style.display = shadowParam;
+                document.getElementById('windows').style.display = windowsParam;
+                resolve();
+            }, POPUP_TIME);
+        }
+    })
+}
+
+const popup = (id, visible) => {
+    return new Promise((resolve, reject) => {
+        let param = visible ? 'block' : 'none';
+        if(visible) {
+            document.getElementById(id).style.display = param;
+            document.getElementById(id).style.opacity = 1;
+            setTimeout(() => {
+                resolve();
+            }, POPUP_TIME);
+        }
+        else {
+            document.getElementById(id).style.opacity = 0;
+            setTimeout(() => {
+                document.getElementById(id).style.display = param;
+                resolve();
+            }, POPUP_TIME);
+        }
+    });
+}
+
+let activePopup;
+
+const openPopup = id => {
+    activePopup = id;
+    let p1 = shadow(true);
+    let p2 = popup(id, true);
+    return Promise.all([p1, p2]);
+}
+
+const closePopup = id => {
+    let p1 = shadow(false);
+    let p2 = popup(id, false);
+    return Promise.all([p1, p2]);
+}
+
+addEventListener('DOMContentLoaded', () => {
+    document.querySelector('#windows')
+        .addEventListener('click', (event) => {
+            if(event.target.id == 'windows') {
+                closePopup(activePopup);
+            }
+        });
+});

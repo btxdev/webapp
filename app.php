@@ -39,7 +39,7 @@ $html_title = $settings->get('html_title');
                 <div class="content">
 
                     <!-- Сотрудники -->
-                    <div class="page" id="employees" style="display: none;">
+                    <div class="page" id="employees">
                         <table class="employees-table">
                             <tr class="employees-table__title-row">
                                     <td style="width: 20px;"><div class="title">#</div></td>
@@ -74,7 +74,7 @@ $html_title = $settings->get('html_title');
                                 <td style="width: 160px;"><button>Подробнее</button></td>
                             </tr>
                         </table>
-                        <button class="employees-btn">Добавить сотрудника</button>
+                        <button class="employees-btn" onclick="openPopup('popup-employee-add')">Добавить сотрудника</button>
                     </div>
 
                     <!-- Услуги -->
@@ -109,11 +109,11 @@ $html_title = $settings->get('html_title');
                                 <td style="width: 100px;"><button class="table-btn__remove">Удалить</button></td>
                             </tr>
                         </table>
-                        <button class="employees-btn">Добавить услугу</button>
+                        <button class="employees-btn" onclick="openPopup('popup-service-add')">Добавить услугу</button>
                     </div>
 
                     <!-- Договоры -->
-                    <div class="page" id="contracts">
+                    <div class="page" id="contracts" style="display: none;">
                         <div class="search">
                             <input type="text" class="search__input" placeholder="Поиск">
                             <button class="search__button">Найти</button>
@@ -162,7 +162,7 @@ $html_title = $settings->get('html_title');
 
                 </div>
 
-                <div id="shadow" style="display: none;"></div>
+                <!-- <div id="shadow" style="display: none;"></div> -->
 
                 <div id="windows" style="display: none;">
 
