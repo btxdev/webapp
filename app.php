@@ -53,7 +53,7 @@ $html_title = $settings->get('html_title');
                                 <td><div class="field">Петров</div></td>
                                 <td><div class="field">Александрович</div></td>
                                 <td><div class="field">Агент по недвижимости</div></td>
-                                <td style="width: 160px;"><div class="button">Подробнее</div></td>
+                                <td style="width: 160px;"><button>Подробнее</button></td>
                             </tr>
                             <tr>
                                 <td style="width: 20px;"><div class="field">2</div></td>
@@ -61,7 +61,7 @@ $html_title = $settings->get('html_title');
                                 <td><div class="field">Иванов</div></td>
                                 <td><div class="field">Игоревич</div></td>
                                 <td><div class="field">Директор</div></td>
-                                <td style="width: 160px;"><div class="button">Подробнее</div></td>
+                                <td style="width: 160px;"><button>Подробнее</button></td>
                             </tr>
                             <tr class="employee">
                                 <td style="width: 20px;"><div class="field">3</div></td>
@@ -69,9 +69,48 @@ $html_title = $settings->get('html_title');
                                 <td><div class="field">Корнишонов</div></td>
                                 <td><div class="field">Константинович</div></td>
                                 <td><div class="field">Бухгалтер</div></td>
-                                <td style="width: 160px;"><div class="button">Подробнее</div></td>
+                                <td style="width: 160px;"><button>Подробнее</button></td>
                             </tr>
                         </table>
+                        <button class="employees-btn">Добавить сотрудника</button>
+                    </div>
+                </div>
+                <div id="shadow"></div>
+                <div id="windows">
+                    <div class="popup" id="popup-employee-edit">
+                        <div class="popup-title">Информация о сотруднике <div class="emp-id"># 1</div></div>
+                        <table class="popup-table">
+                            <tr>
+                                <td><span>Имя</span></td>
+                                <td><input type="text" value="Иван"></td>
+                            </tr>
+                            <tr>
+                                <td><span>Фамилия</span></td>
+                                <td><input type="text" value="Иванов"></td>
+                            </tr>
+                            <tr>
+                                <td><span>Отчество</span></td>
+                                <td><input type="text" value="Иванович"></td>
+                            </tr>
+                            <tr>
+                                <td><span>Дата рождения</span></td>
+                                <td><input type="date" value="01.01.1984"></td>
+                            </tr>
+                            <tr>
+                                <td><span>Номер телефона</span></td>
+                                <td><input type="text" value="+7 (800) 555 35 35"></td>
+                            </tr>
+                            <tr>
+                                <td><span>Адрес электронной почты</span></td>
+                                <td><input type="text" value="webmaster@site.ru"></td>
+                            </tr>
+                            <tr>
+                                <td><span>Дата регистрации</span></td>
+                                <td><input type="date" value="01.01.1984"></td>
+                            </tr>
+                        </table>
+                        <button class="popup-apply">Сохранить</button>
+                        <button class="popup-cancel">Отмена</button>
                     </div>
                 </div>
             </main>

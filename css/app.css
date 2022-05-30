@@ -217,7 +217,117 @@ main {
     width: 300px;
     margin-left: 10px;
 }
-/* .employees-table .field {
-} */
+.employees-btn {
+    font-family: Ubuntu;
+    font-weight: 500;
+    font-size: 13px;
+    color: #fff;
+    line-height: 1.2;
+    text-transform: uppercase;
+    padding: 0 20px;
+    min-width: 200px;
+    height: 42px;
+    background-color: #827ffe;
+    border-radius: 3px;
+    transition: all .4s;
+    cursor: pointer;
+    border: none;
+    margin-left: 40px;
+}
+.employees-btn:hover {
+    background-color: #403866;
+}
+.employees-table button {
+    font-family: Ubuntu;
+    font-weight: 400;
+    font-size: 12px;
+    color: #fff;
+    line-height: 1.2;
+    text-transform: uppercase;
+    padding: 0 20px;
+    min-width: 150px;
+    height: 24px;
+    background-color: #827ffe;
+    border-radius: 3px;
+    transition: all .4s;
+    cursor: pointer;
+    border: none;
+}
+.employees-table button:hover {
+    background-color: #403866;
+}
 
 /* content end */
+
+/* popup start */
+
+#shadow {
+    position: fixed;
+    z-index: 10;
+    background-color: black;
+    opacity: 0.4;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+}
+#windows {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 11;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+.popup {
+    width: 600px;
+    min-height: 300px;
+    border-radius: 8px;
+    position: relative;
+    background-color: #F7F8FC;
+    box-shadow: 5px 5px 11px -2px rgba(0,0,0,0.2);
+}
+.popup-title {
+    display: inline-block;
+    font-size: 20px;
+    margin-left: 20px;
+    font-weight: 600;
+    color: #252733;
+    margin-top: 12px;
+    margin-bottom: 20px;
+}
+.emp-id {
+    font-size: 14px;
+    font-weight: 200;
+    background-color: #e3e3e3;
+    color: #252733;
+    border-radius: 4px;
+    display: inline-block;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 3px;
+    padding-bottom: 2px;
+}
+.popup-table {
+    margin: 20px;
+    width: calc(100% - 40px);
+    margin-top: 0;
+}
+.popup-table td {
+    width: 50%;
+}
+.popup-table span {
+    font-weight: 500;
+    font-size: 16px;
+    color: #252733;
+    background-color: white;
+    border-radius: 2px;
+    padding: 6px;
+    margin: 3px;
+    display: block;
+}
+
+/* popup end */
