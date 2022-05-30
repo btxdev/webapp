@@ -217,7 +217,7 @@ main {
     width: 180px;
     margin-left: 10px;
 }
-.employees-btn {
+.employees-btn, .table-btn__remove {
     font-family: Ubuntu;
     font-weight: 500;
     font-size: 13px;
@@ -255,6 +255,18 @@ main {
 }
 .employees-table button:hover {
     background-color: #403866;
+}
+.table-btn__remove {
+    background-color: #f35e5e !important;
+    margin-left: -10px;
+    min-width: 100px !important;
+}
+.table-btn__remove:hover {
+    background-color: #885252 !important;
+}
+
+.services-table {
+    width: 500px;
 }
 
 /* content end */

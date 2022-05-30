@@ -26,7 +26,7 @@ $html_title = $settings->get('html_title');
         <div class="container">
             <main>
                 <div class="header">
-                    <div class="header__title">Сотрудники</div>
+                    <div class="header__title" id="header-title">Услуги</div>
                     <div class="header__profile">
                         <div class="header__username">admin</div>
                         <div class="header__line"></div>
@@ -37,7 +37,9 @@ $html_title = $settings->get('html_title');
                     </div>
                 </div>
                 <div class="content">
-                    <div class="page" id="employees">
+
+                    <!-- Сотрудники -->
+                    <div class="page" id="employees" style="display: none;">
                         <table class="employees-table">
                             <tr class="employees-table__title-row">
                                     <td style="width: 20px;"><div class="title">#</div></td>
@@ -74,9 +76,49 @@ $html_title = $settings->get('html_title');
                         </table>
                         <button class="employees-btn">Добавить сотрудника</button>
                     </div>
+
+                    <!-- Услуги -->
+                    <div class="page" id="services">
+                        <table class="employees-table services-table">
+                            <tr class="employees-table__title-row">
+                                    <td style="width: 20px;"><div class="title">#</div></td>
+                                    <td><div class="title">Наименование услуги</div></td>
+                                    <td><div class="title">Стоимость</div></td>
+                                    <td style="width: 160px;"><div class="title"></div></td>
+                                    <td style="width: 100px;"><div class="title"></div></td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20px;"><div class="field">1</div></td>
+                                <td><div class="field">Услуга</div></td>
+                                <td><div class="field">300 $</div></td>
+                                <td style="width: 160px;"><button>Редактировать</button></td>
+                                <td style="width: 100px;"><button class="table-btn__remove">Удалить</button></td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20px;"><div class="field">2</div></td>
+                                <td><div class="field">Услуга</div></td>
+                                <td><div class="field">300 $</div></td>
+                                <td style="width: 160px;"><button>Редактировать</button></td>
+                                <td style="width: 100px;"><button class="table-btn__remove">Удалить</button></td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20px;"><div class="field">3</div></td>
+                                <td><div class="field">Услуга</div></td>
+                                <td><div class="field">300 $</div></td>
+                                <td style="width: 160px;"><button>Редактировать</button></td>
+                                <td style="width: 100px;"><button class="table-btn__remove">Удалить</button></td>
+                            </tr>
+                        </table>
+                        <button class="employees-btn">Добавить услугу</button>
+                    </div>
+
+
+
                 </div>
-                <div id="shadow"></div>
-                <div id="windows">
+
+                <div id="shadow" style="display: none;"></div>
+
+                <div id="windows" style="display: none;">
 
                     <!-- Редактировать информацию о сотруднике -->
                     <div class="popup" id="popup-employee-edit" style="display: none;">
@@ -137,7 +179,7 @@ $html_title = $settings->get('html_title');
                     </div>
 
                     <!-- Добавить нового сотрудника -->
-                    <div class="popup" id="popup-employee-add" style="display: block;">
+                    <div class="popup" id="popup-employee-add" style="display: none;">
                         <div class="popup-title">Добавить сотрудника</div>
                         <table class="popup-table">
                             <tr>
@@ -191,7 +233,9 @@ $html_title = $settings->get('html_title');
                     </div>
 
                 </div>
+
             </main>
+
             <aside>
                 <div class="aside-title">
                     <div class="aside-title__logo"></div>
@@ -231,6 +275,7 @@ $html_title = $settings->get('html_title');
                     </li>
                 </ul>
             </aside>
+
         </div>
     </div>
 </body>
