@@ -296,7 +296,7 @@ main {
     margin-left: 20px;
     font-weight: 600;
     color: #252733;
-    margin-top: 12px;
+    margin-top: 20px;
     margin-bottom: 20px;
 }
 .emp-id {
@@ -344,6 +344,36 @@ main {
     border: none;
     outline: none;
     height: 28px;
+}
+.popup-apply, .popup-cancel {
+    font-family: Ubuntu;
+    font-weight: 400;
+    font-size: 12px;
+    color: #fff;
+    line-height: 1.2;
+    text-transform: uppercase;
+    padding: 0 20px;
+    min-width: 150px;
+    height: 24px;
+    background-color: #827ffe;
+    border-radius: 3px;
+    transition: all .1s;
+    cursor: pointer;
+    border: none;
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+.popup-apply {
+    background-color: #43b526;
+}
+.popup-apply:hover {
+    background-color: #52885b;
+}
+.popup-cancel {
+    background-color: #f35e5e;
+}
+.popup-cancel:hover {
+    background-color: #885252;
 }
 
 /* popup end */
