@@ -328,6 +328,7 @@ main {
     margin: 20px;
     width: calc(100% - 40px);
     margin-top: 0;
+    color: #252733;
 }
 .popup-table td {
     width: 50%;
@@ -414,6 +415,29 @@ select {
 #popup-alert {
     min-height: 100px;
     width: 364px;
+}
+.popup-p {
+    font-weight: 400;
+    color: #252733;
+    line-height: 1.2;
+    font-size: 16px;
+    display: block;
+    width: calc(100% - 40px);
+    background: white;
+    padding: 6px;
+    margin-left: 23px;
+    border: none;
+    outline: none;
+    height: 28px;
+}
+.popup-textarea {
+    color: #252733;
+    margin: 10px;
+    margin-left: 23px;
+    width: calc(100% - 40px);
+    height: 100px;
+    resize: none;
+    outline: none;
 }
 
 /* popup end */
