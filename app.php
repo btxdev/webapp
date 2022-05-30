@@ -241,7 +241,7 @@ $html_title = $settings->get('html_title');
                     </div>
 
                     <!-- Редактировать информацию о услуге -->
-                    <div class="popup" id="popup-service-edit">
+                    <div class="popup" id="popup-service-edit" style="display: none;">
                         <div class="popup-title">Информация о услуге</div>
                         <table class="popup-table">
                             <tr>
@@ -260,6 +260,29 @@ $html_title = $settings->get('html_title');
                         <p class="popup-p">Описание услуги</p>
                         <textarea class="popup-textarea">Прародителем текста-рыбы является известный "Lorem Ipsum" – латинский текст, ноги которого растут аж из 45 года до нашей эры. Сервисов по созданию случайного текста на основе Lorem Ipsum великое множество, однако все они имеют один существенный недостаток</textarea><br>
                         <button class="popup-apply">Сохранить</button>
+                        <button class="popup-cancel">Отмена</button>
+                    </div>
+
+                    <!-- Добавить услугу -->
+                    <div class="popup" id="popup-service-add">
+                        <div class="popup-title">Добавить услугу</div>
+                        <table class="popup-table">
+                            <tr>
+                                <td><span>Наименование</span></td>
+                                <td><input type="text" value="Наименование услуги"></td>
+                            </tr>
+                            <tr>
+                                <td><span>Описание</span></td>
+                                <td><input type="text" value="Здесь описание услуги"></td>
+                            </tr>
+                            <tr>
+                                <td><span>Стоимость</span></td>
+                                <td><input type="number" value="300" min="0"></td>
+                            </tr>
+                        </table>
+                        <p class="popup-p">Описание услуги</p>
+                        <textarea class="popup-textarea">Прародителем текста-рыбы является известный "Lorem Ipsum" – латинский текст, ноги которого растут аж из 45 года до нашей эры. Сервисов по созданию случайного текста на основе Lorem Ipsum великое множество, однако все они имеют один существенный недостаток</textarea><br>
+                        <button class="popup-apply">Добавить</button>
                         <button class="popup-cancel">Отмена</button>
                     </div>
 
