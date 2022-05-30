@@ -78,6 +78,7 @@ $html_title = $settings->get('html_title');
                 <div id="shadow"></div>
                 <div id="windows">
 
+                    <!-- Редактировать информацию о сотруднике -->
                     <div class="popup" id="popup-employee-edit" style="display: none;">
                         <div class="popup-title">Информация о сотруднике <div class="emp-id"># 1</div></div>
                         <table class="popup-table">
@@ -135,6 +136,7 @@ $html_title = $settings->get('html_title');
                         <button class="popup-cancel">Отмена</button>
                     </div>
 
+                    <!-- Добавить нового сотрудника -->
                     <div class="popup" id="popup-employee-add" style="display: block;">
                         <div class="popup-title">Добавить сотрудника</div>
                         <table class="popup-table">
