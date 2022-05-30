@@ -26,7 +26,7 @@ $html_title = $settings->get('html_title');
         <div class="container">
             <main>
                 <div class="header">
-                    <div class="header__title" id="header-title">Услуги</div>
+                    <div class="header__title" id="header-title">Договоры</div>
                     <div class="header__profile">
                         <div class="header__username">admin</div>
                         <div class="header__line"></div>
@@ -78,7 +78,7 @@ $html_title = $settings->get('html_title');
                     </div>
 
                     <!-- Услуги -->
-                    <div class="page" id="services">
+                    <div class="page" id="services" style="display: none;">
                         <table class="employees-table services-table">
                             <tr class="employees-table__title-row">
                                     <td style="width: 20px;"><div class="title">#</div></td>
@@ -110,6 +110,40 @@ $html_title = $settings->get('html_title');
                             </tr>
                         </table>
                         <button class="employees-btn">Добавить услугу</button>
+                    </div>
+
+                    <!-- Договоры -->
+                    <div class="page" id="contracts">
+                        <div class="search">
+                            <input type="text" class="search__input" placeholder="Поиск">
+                            <button class="search__button">Найти</button>
+                        </div>
+                        <table class="employees-table services-table">
+                            <tr class="employees-table__title-row">
+                                    <td style="width: 20px;"><div class="title">#</div></td>
+                                    <td><div class="title">Тип договора</div></td>
+                                    <td><div class="title">Дата создания договора</div></td>
+                                    <td style="width: 160px;"><div class="title"></div></td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20px;"><div class="field">1</div></td>
+                                <td><div class="field">default</div></td>
+                                <td><div class="field">01.01.2022</div></td>
+                                <td style="width: 160px;"><button>Просмотр</button></td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20px;"><div class="field">2</div></td>
+                                <td><div class="field">default</div></td>
+                                <td><div class="field">01.01.2022</div></td>
+                                <td style="width: 160px;"><button>Просмотр</button></td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20px;"><div class="field">3</div></td>
+                                <td><div class="field">default</div></td>
+                                <td><div class="field">01.01.2022</div></td>
+                                <td style="width: 160px;"><button>Просмотр</button></td>
+                            </tr>
+                        </table>
                     </div>
 
 
