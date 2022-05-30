@@ -116,9 +116,9 @@ $html_title = $settings->get('html_title');
 
                 </div>
 
-                <div id="shadow"></div>
+                <div id="shadow" style="display: none;"></div>
 
-                <div id="windows">
+                <div id="windows" style="display: none;">
 
                     <!-- Редактировать информацию о сотруднике -->
                     <div class="popup" id="popup-employee-edit" style="display: none;">
@@ -264,7 +264,7 @@ $html_title = $settings->get('html_title');
                     </div>
 
                     <!-- Добавить услугу -->
-                    <div class="popup" id="popup-service-add">
+                    <div class="popup" id="popup-service-add" style="display: none;">
                         <div class="popup-title">Добавить услугу</div>
                         <table class="popup-table">
                             <tr>
