@@ -146,6 +146,18 @@ $html_title = $settings->get('html_title');
                         </table>
                     </div>
 
+                    <!-- Сделки -->
+                    <div class="page" id="deals" style="display: none;"></div>
+
+                    <!-- Недвижимость -->
+                    <div class="page" id="apartments" style="display: none;"></div>
+
+                    <!-- Клиенты -->
+                    <div class="page" id="clients" style="display: none;"></div>
+
+                    <!-- Администрирование -->
+                    <div class="page" id="admin" style="display: none;"></div>
+
 
 
                 </div>
@@ -330,34 +342,34 @@ $html_title = $settings->get('html_title');
                     <div class="aside-title__title">Панель управления</div>
                 </div>
                 <ul class="aside-ul">
-                    <li class="aside-li aside-li_focused">
+                    <li class="aside-li aside-li_focused" onclick="openPage('employees');">
                         <div class="aside-li__icon"></div>
                         <div class="aside-li__label">Сотрудники</div>
                     </li>
-                    <li class="aside-li">
+                    <li class="aside-li" onclick="openPage('services');">
                         <div class="aside-li__icon"></div>
                         <div class="aside-li__label">Услуги</div>
                     </li>
-                    <li class="aside-li">
+                    <li class="aside-li" onclick="openPage('contracts');">
                         <div class="aside-li__icon"></div>
                         <div class="aside-li__label">Договоры</div>
                     </li>
-                    <li class="aside-li">
+                    <li class="aside-li" onclick="openPage('deals');">
                         <div class="aside-li__icon"></div>
                         <div class="aside-li__label">Сделки</div>
                     </li>
-                    <li class="aside-li">
+                    <li class="aside-li" onclick="openPage('apartments');">
                         <div class="aside-li__icon"></div>
                         <div class="aside-li__label">Недвижимость</div>
                     </li>
-                    <li class="aside-li">
+                    <li class="aside-li" onclick="openPage('clients');">
                         <div class="aside-li__icon"></div>
                         <div class="aside-li__label">Клиенты</div>
                     </li>
                 </ul>
                 <div class="aside-line"></div>
                 <ul class="aside-ul">
-                    <li class="aside-li">
+                    <li class="aside-li" onclick="openPage('admin');">
                         <div class="aside-li__icon"></div>
                         <div class="aside-li__label">Администрирование</div>
                     </li>
