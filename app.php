@@ -94,7 +94,7 @@ $html_title = $settings->get('html_title');
                             </tr>
                             <tr>
                                 <td><span>Дата рождения</span></td>
-                                <td><input type="date" value="01.01.1984"></td>
+                                <td><input type="date"></td>
                             </tr>
                             <tr>
                                 <td><span>Номер телефона</span></td>
@@ -106,7 +106,7 @@ $html_title = $settings->get('html_title');
                             </tr>
                             <tr>
                                 <td><span>Дата регистрации</span></td>
-                                <td><input type="date" value="01.01.1984"></td>
+                                <td><input type="date"></td>
                             </tr>
                         </table>
                         <button class="popup-apply">Сохранить</button>
