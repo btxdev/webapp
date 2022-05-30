@@ -58,24 +58,21 @@ const openPage = page => {
 
 const shadow = visible => {
     return new Promise((resolve, reject) => {
-        //let shadowParam = visible ? 'block' : 'none';
-        let windowsParam = visible ? 'flex' : 'none';
+        let param = visible ? 'flex' : 'none';
         if(visible) {
-            //document.getElementById('shadow').style.display = shadowParam;
-            document.getElementById('windows').style.display = windowsParam;
-            //document.getElementById('shadow').style.opacity = 1;
-            document.getElementById('windows').style.opacity = 1;
+            document.getElementById('windows').style.display = param;
+            setTimeout(() => {
+                document.getElementById('windows').style.opacity = 1;
+            }, 10);
             setTimeout(() => {
                 resolve();
             }, POPUP_TIME);
             
         }
         else {
-            //document.getElementById('shadow').style.opacity = 0;
             document.getElementById('windows').style.opacity = 0;
             setTimeout(() => {
-                //document.getElementById('shadow').style.display = shadowParam;
-                document.getElementById('windows').style.display = windowsParam;
+                document.getElementById('windows').style.display = param;
                 resolve();
             }, POPUP_TIME);
         }
@@ -87,7 +84,9 @@ const popup = (id, visible) => {
         let param = visible ? 'block' : 'none';
         if(visible) {
             document.getElementById(id).style.display = param;
-            document.getElementById(id).style.opacity = 1;
+            setTimeout(() => {
+                document.getElementById(id).style.opacity = 1;
+            }, 10);
             setTimeout(() => {
                 resolve();
             }, POPUP_TIME);
@@ -111,7 +110,7 @@ const openPopup = id => {
     return Promise.all([p1, p2]);
 }
 
-const closePopup = id => {
+const closePopup = (id = activePopup) => {
     let p1 = shadow(false);
     let p2 = popup(id, false);
     return Promise.all([p1, p2]);
@@ -121,7 +120,7 @@ addEventListener('DOMContentLoaded', () => {
     document.querySelector('#windows')
         .addEventListener('click', (event) => {
             if(event.target.id == 'windows') {
-                closePopup(activePopup);
+                closePopup();
             }
         });
 });

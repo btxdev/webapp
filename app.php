@@ -55,7 +55,7 @@ $html_title = $settings->get('html_title');
                                 <td><div class="field">Петров</div></td>
                                 <td><div class="field">Александрович</div></td>
                                 <td><div class="field">Агент по недвижимости</div></td>
-                                <td style="width: 160px;"><button>Подробнее</button></td>
+                                <td style="width: 160px;"><button onclick="openPopup('popup-employee-edit');">Подробнее</button></td>
                             </tr>
                             <tr>
                                 <td style="width: 20px;"><div class="field">2</div></td>
@@ -63,7 +63,7 @@ $html_title = $settings->get('html_title');
                                 <td><div class="field">Иванов</div></td>
                                 <td><div class="field">Игоревич</div></td>
                                 <td><div class="field">Директор</div></td>
-                                <td style="width: 160px;"><button>Подробнее</button></td>
+                                <td style="width: 160px;"><button onclick="openPopup('popup-employee-edit');">Подробнее</button></td>
                             </tr>
                             <tr class="employee">
                                 <td style="width: 20px;"><div class="field">3</div></td>
@@ -71,7 +71,7 @@ $html_title = $settings->get('html_title');
                                 <td><div class="field">Корнишонов</div></td>
                                 <td><div class="field">Константинович</div></td>
                                 <td><div class="field">Бухгалтер</div></td>
-                                <td style="width: 160px;"><button>Подробнее</button></td>
+                                <td style="width: 160px;"><button onclick="openPopup('popup-employee-edit');">Подробнее</button></td>
                             </tr>
                         </table>
                         <button class="employees-btn" onclick="openPopup('popup-employee-add')">Добавить сотрудника</button>
@@ -91,21 +91,21 @@ $html_title = $settings->get('html_title');
                                 <td style="width: 20px;"><div class="field">1</div></td>
                                 <td><div class="field">Услуга</div></td>
                                 <td><div class="field">300 $</div></td>
-                                <td style="width: 160px;"><button>Редактировать</button></td>
+                                <td style="width: 160px;"><button onclick="openPopup('popup-service-edit');">Редактировать</button></td>
                                 <td style="width: 100px;"><button class="table-btn__remove">Удалить</button></td>
                             </tr>
                             <tr>
                                 <td style="width: 20px;"><div class="field">2</div></td>
                                 <td><div class="field">Услуга</div></td>
                                 <td><div class="field">300 $</div></td>
-                                <td style="width: 160px;"><button>Редактировать</button></td>
+                                <td style="width: 160px;"><button onclick="openPopup('popup-service-edit');">Редактировать</button></td>
                                 <td style="width: 100px;"><button class="table-btn__remove">Удалить</button></td>
                             </tr>
                             <tr>
                                 <td style="width: 20px;"><div class="field">3</div></td>
                                 <td><div class="field">Услуга</div></td>
                                 <td><div class="field">300 $</div></td>
-                                <td style="width: 160px;"><button>Редактировать</button></td>
+                                <td style="width: 160px;"><button onclick="openPopup('popup-service-edit');">Редактировать</button></td>
                                 <td style="width: 100px;"><button class="table-btn__remove">Удалить</button></td>
                             </tr>
                         </table>
@@ -221,7 +221,7 @@ $html_title = $settings->get('html_title');
                             </tr>
                         </table>
                         <button class="popup-apply">Сохранить</button>
-                        <button class="popup-cancel">Отмена</button>
+                        <button class="popup-cancel" onclick="closePopup();">Отмена</button>
                     </div>
 
                     <!-- Добавить нового сотрудника -->
@@ -275,7 +275,7 @@ $html_title = $settings->get('html_title');
                             </tr>
                         </table>
                         <button class="popup-apply">Добавить</button>
-                        <button class="popup-cancel">Отмена</button>
+                        <button class="popup-cancel" onclick="closePopup();">Отмена</button>
                     </div>
 
                     <!-- Предупреждение -->
@@ -306,7 +306,7 @@ $html_title = $settings->get('html_title');
                         <p class="popup-p">Описание услуги</p>
                         <textarea class="popup-textarea">Прародителем текста-рыбы является известный "Lorem Ipsum" – латинский текст, ноги которого растут аж из 45 года до нашей эры. Сервисов по созданию случайного текста на основе Lorem Ipsum великое множество, однако все они имеют один существенный недостаток</textarea><br>
                         <button class="popup-apply">Сохранить</button>
-                        <button class="popup-cancel">Отмена</button>
+                        <button class="popup-cancel" onclick="closePopup();">Отмена</button>
                     </div>
 
                     <!-- Добавить услугу -->
@@ -329,7 +329,7 @@ $html_title = $settings->get('html_title');
                         <p class="popup-p">Описание услуги</p>
                         <textarea class="popup-textarea">Прародителем текста-рыбы является известный "Lorem Ipsum" – латинский текст, ноги которого растут аж из 45 года до нашей эры. Сервисов по созданию случайного текста на основе Lorem Ipsum великое множество, однако все они имеют один существенный недостаток</textarea><br>
                         <button class="popup-apply">Добавить</button>
-                        <button class="popup-cancel">Отмена</button>
+                        <button class="popup-cancel" onclick="closePopup();">Отмена</button>
                     </div>
 
                 </div>
