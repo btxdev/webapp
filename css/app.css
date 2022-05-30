@@ -172,6 +172,7 @@ main {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
+    border: 2px solid #F7F8FC;
 }
 /* header end */
 
