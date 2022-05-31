@@ -475,6 +475,10 @@ if (!$authorized) {
                         <div class="aside-li__icon"></div>
                         <div class="aside-li__label">Администрирование</div>
                     </li>
+                    <li class="aside-li" onclick="logout();">
+                        <div class="aside-li__icon"></div>
+                        <div class="aside-li__label">Выход</div>
+                    </li>
                 </ul>
             </aside>
 
