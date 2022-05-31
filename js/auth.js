@@ -19,17 +19,22 @@ function loginForm() {
         })
     })
     .then(response => response.text())
-    .then(dataStr => {
-        console.log(dataStr);
+    .then(body => {
+        try {
+            return JSON.parse(body);
+        }
+        catch {
+            throw Error(body);
+        }
     })
-    //.then(response => response.json())
-    // .then(data => {
-    //     if(data['status'] == 'OK') reload();
-    //     else {
-    //         console.log(data);
-    //         alert(data['msg']);
-    //     }
-    // })
+    .then(data => {
+        if(data['status'] == 'OK') reload();
+        else {
+            console.log(data);
+            alert(data['msg']);
+        }
+    })
+    .catch(console.error);
 }
 
 addEventListener('DOMContentLoaded', () => {
