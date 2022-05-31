@@ -29,6 +29,22 @@ class Database extends PDO {
         return $result;
     }
 
+    function strgen($alphabet = '0123456789abcdef', $len = 8) {
+        $alen = strlen($alphabet);
+        $str = '';
+        for($i = 0; $i < $len; $i++) {
+            $str .= $alphabet[random_int(0, $alen)];
+        }
+        return $str;
+    }
+
+    function salt() {
+        return $this->strgen('0123456789abcdefghijklmnopqrstuvwxyz', 8);
+    }
+
+    function pepper() {
+        return '11f70g7z';
+    }
 
 
 

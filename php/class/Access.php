@@ -13,13 +13,7 @@ class Access extends Admin {
     }
 
     function generateSessionHash() {
-        $alphabet = '0123456789abcdef';
-        $alen = strlen($alphabet);
-        $hash = '';
-        for($i = 0; $i < $this->hash_hardness; $i++) {
-            $hash .= $alphabet[random_int(0, $alen)];
-        }
-        return $hash;
+        return $this->strgen('0123456789abcdef', $this->$hash_hardness);
     }
 
     function checkAccess($hash) {

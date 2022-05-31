@@ -13,12 +13,12 @@ class Admin extends Database {
 
     function getUserId($username) {
         $rows = $this->fetch(
-            'SELECT `uuid` FROM users WHERE uname=?',
+            'SELECT `employee_id` FROM employees WHERE username=?',
             [$username]
         );
         if($rows == false) return false;
         else {
-            return intval($rows['uuid']);
+            return intval($rows['employee_id']);
         }
     }
 
@@ -27,14 +27,17 @@ class Admin extends Database {
         if($this->getUserId($username) != false) {
             return false;
         }
+        $salt = $this->salt();
         // создание записи в БД
         $this->run(
-            'INSERT INTO users 
-            (uname, password)
-            VALUES (:uname, :password)',
+            'INSERT INTO employees 
+            (username, password, salt, reg_date)
+            VALUES (:username, :password, :salt, :reg_date)',
             [
-                ':uname' => $username,
-                ':password' => $this->hashPassword($password)
+                ':username' => $username,
+                ':password' => $this->hashPassword($password, $salt),
+                ':salt' => $salt,
+                ':reg_date' => date('Y-m-d')
             ]
         );
         // id созданного пользователя
@@ -42,13 +45,13 @@ class Admin extends Database {
         return $id;
     }
 
-    function hashPassword($password) {
-        return password_hash($password, PASSWORD_BCRYPT);
+    function hashPassword($password, $salt) {
+        return password_hash($password.$salt.$this->pepper(), PASSWORD_BCRYPT);
     }
 
     function removeUser($uuid) {
         // удаление записи
-        $this->run('DELETE IGNORE FROM users WHERE uuid=?', [$uuid]);
+        $this->run('DELETE IGNORE FROM employees WHERE employee_id=?', [$uuid]);
     }
 
     function createRole($role) {
@@ -70,11 +73,11 @@ class Admin extends Database {
         $role_id = intval($rows['role_id']);
         // создание записи в БД
         $this->run(
-            'INSERT IGNORE INTO users_roles 
-            (uuid, role_id)
-            VALUES (:uuid, :role_id)',
+            'INSERT IGNORE INTO employees_roles 
+            (employee_id, role_id)
+            VALUES (:employee_id, :role_id)',
             [
-                ':uuid' => $uuid,
+                ':employee_id' => $uuid,
                 ':role_id' => $role_id
             ]
         );
