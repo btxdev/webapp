@@ -1,3 +1,8 @@
+<?php
+
+header('Location: app');
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

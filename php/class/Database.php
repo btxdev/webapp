@@ -46,26 +46,6 @@ class Database extends PDO {
         return '11f70g7z';
     }
 
-
-
-// fetch column
-
-// fetch all
-
-// count
-
-// insert line in table
-
-// remove line
-
-// update line
-
-// create table
-
-// drop table
-
-
-
 }
 
 ?>

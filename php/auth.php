@@ -8,17 +8,14 @@ $decoded = [];
 $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
 
 if ($contentType === "application/json") {
-    //Receive the RAW post data.
+    // получение данных POST формы
     $content = trim(file_get_contents("php://input"));
 
     $decoded = json_decode($content, true);
 
-    //If json_decode failed, the JSON is invalid.
+    // ошибка обработки JSON
     if(! is_array($decoded)) {
         exit(emptyJson());
-    }
-    else {
-        //var_dump($decoded);
     }
 }
 
@@ -41,15 +38,6 @@ function requireFields($fields) {
 if(isset($decoded['op'])) {
 
     if($decoded['op'] == 'login') {
-
-        // $session = $access->getSessionCookie($settings->get('session_name'));
-        // if($session != 'none') {
-        //     $id = $access->getUserIdBySessionHash($session);
-        //     if($id != false) {
-        //         // authorized
-        //         exit('AUTHORIZED');
-        //     }
-        // }
 
         requireFields(['login', 'password']);
 
@@ -76,7 +64,7 @@ if(isset($decoded['op'])) {
         if($session != 'none') {
             $id = $access->getUserIdBySessionHash($session);
             if($id != false) {
-                // authorized
+                // авторизован
                 try {
                     $access->removeAccessFrom($session);
                     $status = new Status('OK');

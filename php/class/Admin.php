@@ -56,14 +56,12 @@ class Admin extends Database {
     function hashPassword($password, $salt) {
         $salted = $this->saltPassword($password, $salt);
         $peppered = $this->pepperPassword($salted);
-        // return password_hash($peppered, PASSWORD_BCRYPT);
         return $peppered;
     }
 
     function verifyPassword($password, $salt, $hash) {
         $salted = $this->saltPassword($password, $salt);
         $peppered = $this->pepperPassword($salted);
-        // return password_verify($peppered, $hash);
         return ($peppered == $hash);
     }
 
