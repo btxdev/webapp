@@ -18,18 +18,18 @@ function loginForm() {
             password: password
         })
     })
-    // .then(response => response.text())
-    // .then(dataStr => {
-    //     console.log(dataStr);
-    // })
-    .then(response => response.json())
-    .then(data => {
-        if(data['status'] == 'OK') reload();
-        else {
-            console.log(data);
-            alert(data['msg']);
-        }
+    .then(response => response.text())
+    .then(dataStr => {
+        console.log(dataStr);
     })
+    //.then(response => response.json())
+    // .then(data => {
+    //     if(data['status'] == 'OK') reload();
+    //     else {
+    //         console.log(data);
+    //         alert(data['msg']);
+    //     }
+    // })
 }
 
 addEventListener('DOMContentLoaded', () => {

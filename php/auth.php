@@ -56,9 +56,9 @@ if(isset($decoded['op'])) {
         $login = processStatus($validate->login($decoded['login']));
         $password = processStatus($validate->password($decoded['password']));
         
-        $loginStatus = $access->login($login, $password);
-        if($loginStatus->ok()) {
-            $hash = $access->grantAccessToUserName($login);
+        $loginResult = $access->login($login, $password);
+        if($loginResult->ok()) {
+            $hash = $loginResult->session;
             $result = $access->setSessionCookie($settings->get('session_name'), $hash);
             exit($result->json());
         }
