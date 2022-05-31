@@ -19,9 +19,16 @@ if(isset($_POST['op'])) {
 
     if($_POST['op'] == 'login') {
 
-        requireFields(['login', 'password']);
+        $session = $access->getSessionCookie($settings->get('session_name'));
+        if($session != 'none') {
+            $id = $access->getUserIdBySessionHash($session);
+            if($id != false) {
+                // authorized
+                exit('AUTHORIZED');
+            }
+        }
 
-        
+        requireFields(['login', 'password']);
 
         $login = processStatus($validate->login($_POST['login']));
         $password = processStatus($validate->password($_POST['password']));
@@ -42,7 +49,22 @@ if(isset($_POST['op'])) {
     }
 
     if($_POST['op'] == 'logout') {
-        
+        $session = $access->getSessionCookie($settings->get('session_name'));
+        if($session != 'none') {
+            $id = $access->getUserIdBySessionHash($session);
+            if($id != false) {
+                // authorized
+                try {
+                    $access->removeAccessFrom($session);
+                    $status = new Status('OK');
+                }
+                catch(Exception $e) {
+                    $status = new Status('ERROR');
+                }
+                exit($status->json());
+            }
+        }
+        exit();
     }
 
 }

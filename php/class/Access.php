@@ -28,7 +28,8 @@ class Access extends Admin {
                 ':hash' => $hash
             ]
         );
-        if($result != false) $this->uuid = $result;
+        if($result != false) $this->uuid = $result['employee_id'];
+        //return 'pizda';
         return $result;
     }
 
@@ -118,8 +119,13 @@ class Access extends Admin {
         return new Status('OK');
     }
 
-    function checkSessionCookie($session_name) {
+    function getSessionCookie($session_name) {
         $hash = isset($_COOKIE[$session_name]) ? $_COOKIE[$session_name] : 'none';
+        return $hash;
+    }
+
+    function checkSessionCookie($session_name) {
+        $hash = $this->getSessionCookie($session_name);
         return $this->isAccessGranted($hash);
     }
 
