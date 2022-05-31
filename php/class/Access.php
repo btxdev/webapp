@@ -3,29 +3,11 @@
 // класс предоставляет методы для проверки и выдачи доступа
 
 include_once __DIR__.'/Admin.php';
-
-class Status {
-    function __construct($status, $session='', $msg='') {
-
-        $this->status = $status;
-        $this->session = $session;
-        $this->msg = $msg;
-
-        switch($status) {
-            case 'OK':
-                break;
-            case 'USER_NOT_FOUND':
-            case 'WRONG_PASSWORD':
-                $this->status = 'WRONG_PASSWORD';
-                $this->msg = 'Неверный логин или пароль, проверьте введенные данные.';
-        }
-        
-    }
-}
+include_once __DIR__.'/Status.php';
 
 class Access extends Admin {
 
-    function __construct($instance, $session_name, $hash_hardness = 16) {
+    function __construct($instance, $session_name, $hash_hardness = 32) {
         $this->instance = $instance;
         $this->session_name = $session_name;
         $this->hash_hardness = $hash_hardness;
@@ -46,7 +28,8 @@ class Access extends Admin {
                 ':hash' => $hash
             ]
         );
-        if($result != false) $this->uuid = $result;
+        if($result != false) $this->uuid = $result['employee_id'];
+        //return 'pizda';
         return $result;
     }
 
@@ -122,8 +105,28 @@ class Access extends Admin {
         if(!$this->verifyPassword($password_raw, $salt, $hash))
             return new Status('WRONG_PASSWORD');
 
-        return new Status('OK', $this->grantAccessToUserId($uuid));
+        return new Status('OK', ['session' => $this->grantAccessToUserId($uuid)]);
 
+    }
+
+    function setSessionCookie($session_name, $hash) {
+        setcookie($session_name, $hash, [
+            'expires' => time() + 60 * 60 * 24,
+            'path' => '/',
+            'secure' => false,
+            'samesite' => 'Strict'
+        ]);
+        return new Status('OK');
+    }
+
+    function getSessionCookie($session_name) {
+        $hash = isset($_COOKIE[$session_name]) ? $_COOKIE[$session_name] : 'none';
+        return $hash;
+    }
+
+    function checkSessionCookie($session_name) {
+        $hash = $this->getSessionCookie($session_name);
+        return $this->isAccessGranted($hash);
     }
 
 }
