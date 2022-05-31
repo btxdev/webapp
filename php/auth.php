@@ -63,7 +63,7 @@ if(isset($decoded['op'])) {
             exit($result->json());
         }
         else {
-            exit($loginStatus->json());
+            exit($loginResult->json());
         }
     }
 

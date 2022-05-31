@@ -29,7 +29,6 @@ class Access extends Admin {
             ]
         );
         if($result != false) $this->uuid = $result['employee_id'];
-        //return 'pizda';
         return $result;
     }
 
