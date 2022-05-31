@@ -30,7 +30,7 @@ class Database extends PDO {
     }
 
     function strgen($alphabet = '0123456789abcdef', $len = 8) {
-        $alen = strlen($alphabet);
+        $alen = strlen($alphabet) - 1;
         $str = '';
         for($i = 0; $i < $len; $i++) {
             $str .= $alphabet[random_int(0, $alen)];

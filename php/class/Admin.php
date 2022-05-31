@@ -45,8 +45,26 @@ class Admin extends Database {
         return $id;
     }
 
+    function saltPassword($password, $salt) {
+        return hash_hmac('sha256', $password, $salt);
+    }
+
+    function pepperPassword($password) {
+        return hash_hmac('sha256', $password, $this->pepper());
+    }
+
     function hashPassword($password, $salt) {
-        return password_hash($password.$salt.$this->pepper(), PASSWORD_BCRYPT);
+        $salted = $this->saltPassword($password, $salt);
+        $peppered = $this->pepperPassword($salted);
+        // return password_hash($peppered, PASSWORD_BCRYPT);
+        return $peppered;
+    }
+
+    function verifyPassword($password, $salt, $hash) {
+        $salted = $this->saltPassword($password, $salt);
+        $peppered = $this->pepperPassword($salted);
+        // return password_verify($peppered, $hash);
+        return ($peppered == $hash);
     }
 
     function removeUser($uuid) {

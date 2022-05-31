@@ -260,13 +260,13 @@
         REFERENCES `roles`(`role_id`) ON DELETE CASCADE ON UPDATE CASCADE;'
     );
 
-    // // employees --- sessions
-    // // установка связи между таблицами employees и employees_sessions по индексу employee_id
-    // // при удалении пользователя, будет удалены все сессии этого пользователя
-    // $db->run(
-    //     'ALTER TABLE `employees_sessions` ADD FOREIGN KEY (`employee_id`) 
-    //     REFERENCES `employees`(`employee_id`) ON DELETE CASCADE ON UPDATE CASCADE;'
-    // );
+    // employees --- sessions
+    // установка связи между таблицами employees и employees_sessions по индексу employee_id
+    // при удалении пользователя, будет удалены все сессии этого пользователя
+    $db->run(
+        'ALTER TABLE `sessions` ADD FOREIGN KEY (`employee_id`) 
+        REFERENCES `employees`(`employee_id`) ON DELETE CASCADE ON UPDATE CASCADE;'
+    );
     // // установка связи между таблицами employees и employees_sessions по индексу session_id
     // // при удалении сессии, эта сессия будет удалена у всех пользователей
     // $db->run(
