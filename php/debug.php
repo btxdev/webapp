@@ -33,4 +33,7 @@
 
     // var_dump($result);
 
+    // $result = $access->grantAccessToUserName('admin');
+    // $access->setSessionCookie($settings->get('session_name'), $result);
+
 ?>
