@@ -28,15 +28,15 @@ $html_title = $settings->get('html_title');
                 <form class="login-form__form">
                     <span class="login-form__title">Авторизация</span>
                     <div class="login-form__input">
-                        <input type="text" class="input" name="username" placeholder="Аккаунт">
+                        <input type="text" class="input" name="username" placeholder="Аккаунт" id='login'>
                         <span class="focus-input"></span>
                     </div>
                     <div class="login-form__input">
-                        <input type="password" class="input" name="password" placeholder="Пароль">
+                        <input type="password" class="input" name="password" placeholder="Пароль" id='password'>
                         <span class="focus-input"></span>
                     </div>
                     <div class="login-form__button">
-                        <button class="button">Вход</button>
+                        <button class="button" onclick='loginForm()'>Вход</button>
                     </div>
                 </form>
             </div>
