@@ -29,8 +29,8 @@
 
     //$access->removeAccessFromUserName('admin');
 
-    // $result = $access->login('admin', 'r00tPassw0rd');
+    $result = $access->login('admin', 'r00tPassw0rd');
 
-    // var_dump($result);
+    var_dump($result);
 
 ?>
