@@ -3,8 +3,8 @@ function reload() {
 }
 
 function loginForm() {
-    let login = document.querySelector('#login');
-    let password = document.querySelector('#password');
+    let login = document.querySelector('#login').value;
+    let password = document.querySelector('#password').value;
     fetch('php/auth.php', {
         method: 'POST',
         cache: 'no-cache',
@@ -18,9 +18,21 @@ function loginForm() {
             password: password
         })
     })
+    // .then(response => response.text())
+    // .then(dataStr => {
+    //     console.log(dataStr);
+    // })
     .then(response => response.json())
     .then(data => {
-        if(data['msg'] == 'OK') reload();
-        else alert(data);
+        if(data['status'] == 'OK') reload();
+        else {
+            console.log(data);
+            alert(data['msg']);
+        }
     })
 }
+
+addEventListener('DOMContentLoaded', () => {
+    let form = document.querySelector('form');
+    form.addEventListener('submit', event => event.preventDefault());
+})
