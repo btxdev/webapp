@@ -1,0 +1,111 @@
+<!-- Редактировать информацию о сотруднике -->
+<div class="popup" id="popup-employee-edit" style="display: none;">
+    <div class="popup-title">Информация о сотруднике <div class="emp-id"># 1</div></div>
+    <table class="popup-table">
+        <tr>
+            <td><span>Имя</span></td>
+            <td><input type="text" value="Иван"></td>
+        </tr>
+        <tr>
+            <td><span>Фамилия</span></td>
+            <td><input type="text" value="Иванов"></td>
+        </tr>
+        <tr>
+            <td><span>Отчество</span></td>
+            <td><input type="text" value="Иванович"></td>
+        </tr>
+        <tr>
+            <td><span>Должность</span></td>
+            <td>
+                <select name="edit-employee-position" id="popup-employy-edit__select">
+                    <option value="">Выберите должность</option>
+                    <option value="director">Директор</option>
+                    <option value="agent">Агент по недвижимости</option>
+                    <option value="admin">Системный администратор</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><span>Уровень доступа</span></td>
+            <td>
+                <select name="edit-employee-role" id="popup-employy-edit__select">
+                    <option value="">Выберите роль</option>
+                    <option value="director">Администратор</option>
+                    <option value="agent">Сотрудник</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><span>Дата рождения</span></td>
+            <td><input type="date"></td>
+        </tr>
+        <tr>
+            <td><span>Номер телефона</span></td>
+            <td><input type="text" value="+7 (800) 555 35 35"></td>
+        </tr>
+        <tr>
+            <td><span>Адрес электронной почты</span></td>
+            <td><input type="text" value="webmaster@site.ru"></td>
+        </tr>
+        <tr>
+            <td><span>Дата регистрации</span></td>
+            <td><input type="date"></td>
+        </tr>
+    </table>
+    <button class="popup-apply">Сохранить</button>
+    <button class="popup-cancel" onclick="closePopup();">Отмена</button>
+</div>
+
+<!-- Добавить нового сотрудника -->
+<div class="popup" id="popup-employee-add" style="display: none;">
+    <div class="popup-title">Добавить сотрудника</div>
+    <table class="popup-table">
+        <tr>
+            <td><span>Имя</span></td>
+            <td><input type="text" value="Иван"></td>
+        </tr>
+        <tr>
+            <td><span>Фамилия</span></td>
+            <td><input type="text" value="Иванов"></td>
+        </tr>
+        <tr>
+            <td><span>Отчество</span></td>
+            <td><input type="text" value="Иванович"></td>
+        </tr>
+        <tr>
+            <td><span>Должность</span></td>
+            <td>
+                <select name="edit-employee-position" id="popup-employy-edit__select">
+                    <option value="">Выберите должность</option>
+                    <option value="director">Директор</option>
+                    <option value="agent">Агент по недвижимости</option>
+                    <option value="admin">Системный администратор</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><span>Уровень доступа</span></td>
+            <td>
+                <select name="edit-employee-role" id="popup-employy-edit__select">
+                    <option value="">Выберите роль</option>
+                    <option value="director">Администратор</option>
+                    <option value="agent">Сотрудник</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><span>Дата рождения</span></td>
+            <td><input type="date"></td>
+        </tr>
+        <tr>
+            <td><span>Номер телефона</span></td>
+            <td><input type="text" value="+7 (800) 555 35 35"></td>
+        </tr>
+        <tr>
+            <td><span>Адрес электронной почты</span></td>
+            <td><input type="text" value="webmaster@site.ru"></td>
+        </tr>
+    </table>
+    <button class="popup-apply">Добавить</button>
+    <button class="popup-cancel" onclick="closePopup();">Отмена</button>
+</div>
