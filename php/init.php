@@ -3,10 +3,12 @@
     include_once __DIR__.'/main.php';
     include_once __DIR__.'/include_db.php';
 
-    // === создание сущностей ===
+    //
 
     $db->run('SET FOREIGN_KEY_CHECKS = 0;');
     $db->run('SET UNIQUE_CHECKS = 0;');
+
+    // создание сущностей
 
     // создание таблицы employees
     $db->run('DROP TABLE IF EXISTS `employees`;');
@@ -149,202 +151,29 @@
         ENGINE = InnoDB;'
     );
 
-    // === таблицы для организации связей многие ко многим, один ко многим ===
-
-    // создание таблицы employees_roles
-    $db->run('DROP TABLE IF EXISTS `employees_roles`;');
-    $db->run(
-        'CREATE TABLE `employees_roles` ( 
-            `employee_id` INT UNSIGNED NOT NULL , 
-            `role_id` INT UNSIGNED NOT NULL , 
-            PRIMARY KEY (`employee_id`)
-        ) 
-        ENGINE = InnoDB;'
-    );
-
-    // создание таблицы employees_positions
-    $db->run('DROP TABLE IF EXISTS `employees_positions`;');
-    $db->run(
-        'CREATE TABLE `employees_positions` ( 
-            `employee_id` INT UNSIGNED NOT NULL , 
-            `position_id` INT UNSIGNED NOT NULL , 
-            PRIMARY KEY (`employee_id`)
-        ) 
-        ENGINE = InnoDB;'
-    );
-
-    // создание таблицы deals_services
-    $db->run('DROP TABLE IF EXISTS `deals_services`;');
-    $db->run(
-        'CREATE TABLE `deals_services` ( 
-            `deal_id` INT UNSIGNED NOT NULL , 
-            `service_id` INT UNSIGNED NOT NULL , 
-            PRIMARY KEY (`deal_id`)
-        ) 
-        ENGINE = InnoDB;'
-    );
-
-    // создание таблицы deals_apartments
-    $db->run('DROP TABLE IF EXISTS `deals_apartments`;');
-    $db->run(
-        'CREATE TABLE `deals_apartments` ( 
-            `deal_id` INT UNSIGNED NOT NULL , 
-            `apartment_id` INT UNSIGNED NOT NULL , 
-            PRIMARY KEY (`deal_id`)
-        ) 
-        ENGINE = InnoDB;'
-    );
-
-    // создание таблицы deals_contracts
-    $db->run('DROP TABLE IF EXISTS `deals_contracts`;');
-    $db->run(
-        'CREATE TABLE `deals_contracts` ( 
-            `deal_id` INT UNSIGNED NOT NULL , 
-            `contract_id` INT UNSIGNED NOT NULL , 
-            PRIMARY KEY (`deal_id`) , 
-            INDEX `contract_id` (`contract_id`)
-        )
-        ENGINE = InnoDB;'
-    );
-
-    // создание таблицы deals_clients
-    $db->run('DROP TABLE IF EXISTS `deals_clients`;');
-    $db->run(
-        'CREATE TABLE `deals_clients` ( 
-            `deal_id` INT UNSIGNED NOT NULL , 
-            `client_id` INT UNSIGNED NOT NULL , 
-            PRIMARY KEY (`deal_id`)
-        ) 
-        ENGINE = InnoDB;'
-    );
-
-    // создание таблицы clients_passports
-    $db->run('DROP TABLE IF EXISTS `clients_passports`;');
-    $db->run(
-        'CREATE TABLE `clients_passports` ( 
-            `client_id` INT UNSIGNED NOT NULL , 
-            `passport_id` INT UNSIGNED NOT NULL , 
-            PRIMARY KEY (`client_id`) , 
-            INDEX `passport_id` (`passport_id`)
-        )
-        ENGINE = InnoDB;'
-    );
-
-    // создание таблицы deals_employees
-    $db->run('DROP TABLE IF EXISTS `deals_employees`;');
-    $db->run(
-        'CREATE TABLE `deals_employees` ( 
-            `deal_id` INT UNSIGNED NOT NULL , 
-            `employee_id` INT UNSIGNED NOT NULL , 
-            PRIMARY KEY (`deal_id`)
-        ) 
-        ENGINE = InnoDB;'
-    );
-
-    // === организация связей ===
-
-    $db->run('SET FOREIGN_KEY_CHECKS = 1;');
-    $db->run('SET UNIQUE_CHECKS = 1;');
-
-    // employees --- roles
-    // установка связи между таблицами employees и employees_roles по индексу employee_id
-    // при удалении пользователя, будет удалена запись о роли этого пользователя
-    $db->run(
-        'ALTER TABLE `employees_roles` ADD FOREIGN KEY (`employee_id`) 
-        REFERENCES `employees`(`employee_id`) ON DELETE CASCADE ON UPDATE CASCADE;'
-    );
-    // установка связи между таблицами employees и employees_roles по индексу role_id
-    // при удалении роли, эта роль будет удалена у всех пользователей
-    $db->run(
-        'ALTER TABLE `employees_roles` ADD FOREIGN KEY (`role_id`) 
-        REFERENCES `roles`(`role_id`) ON DELETE CASCADE ON UPDATE CASCADE;'
-    );
-
-    // employees --- sessions
-    // установка связи между таблицами employees и employees_sessions по индексу employee_id
-    // при удалении пользователя, будет удалены все сессии этого пользователя
+    // связь employees и sessions
     $db->run(
         'ALTER TABLE `sessions` ADD FOREIGN KEY (`employee_id`) 
         REFERENCES `employees`(`employee_id`) ON DELETE CASCADE ON UPDATE CASCADE;'
     );
-    // // установка связи между таблицами employees и employees_sessions по индексу session_id
-    // // при удалении сессии, эта сессия будет удалена у всех пользователей
-    // $db->run(
-    //     'ALTER TABLE `employees_sessions` ADD FOREIGN KEY (`session_id`) 
-    //     REFERENCES `sessions`(`session_id`) ON DELETE CASCADE ON UPDATE CASCADE;'
-    // );
 
-    // employees --- positions
-    $db->run(
-        'ALTER TABLE `employees_positions` ADD FOREIGN KEY (`employee_id`) 
-        REFERENCES `employees`(`employee_id`) ON DELETE CASCADE ON UPDATE CASCADE;'
-    );
-    $db->run(
-        'ALTER TABLE `employees_positions` ADD FOREIGN KEY (`position_id`) 
-        REFERENCES `positions`(`position_id`) ON DELETE CASCADE ON UPDATE CASCADE;'
-    );
+    // организация связей
 
-    // deals --- services
-    $db->run(
-        'ALTER TABLE `deals_services` ADD FOREIGN KEY (`deal_id`) 
-        REFERENCES `deals`(`deal_id`) ON DELETE CASCADE ON UPDATE CASCADE;'
-    );
-    $db->run(
-        'ALTER TABLE `deals_services` ADD FOREIGN KEY (`service_id`) 
-        REFERENCES `services`(`service_id`) ON DELETE CASCADE ON UPDATE CASCADE;'
-    );
+    $admin->relation_1N('roles', 'employees', 'role_id', 'employee_id');
+    $admin->relation_1N('positions', 'employees', 'position_id', 'employee_id');
+    $admin->relation_1N('employees', 'deals', 'employee_id', 'deal_id');
+    $admin->relation_1N('services', 'deals', 'service_id', 'deal_id');
+    $admin->relation_11('contracts', 'deals', 'contract_id', 'deal_id');
+    $admin->relation_1N('apartments', 'deals', 'apartment_id', 'deal_id');
+    $admin->relation_11('clients', 'passports', 'client_id', 'passport_id');
+    $admin->relation_1N('clients', 'deals', 'client_id', 'deal_id');
 
-    // deals --- apartments
-    $db->run(
-        'ALTER TABLE `deals_apartments` ADD FOREIGN KEY (`deal_id`) 
-        REFERENCES `deals`(`deal_id`) ON DELETE CASCADE ON UPDATE CASCADE;'
-    );
-    $db->run(
-        'ALTER TABLE `deals_apartments` ADD FOREIGN KEY (`apartment_id`) 
-        REFERENCES `apartments`(`apartment_id`) ON DELETE CASCADE ON UPDATE CASCADE;'
-    );
+    //
 
-    // deals --- clients
-    $db->run(
-        'ALTER TABLE `deals_clients` ADD FOREIGN KEY (`deal_id`) 
-        REFERENCES `deals`(`deal_id`) ON DELETE CASCADE ON UPDATE CASCADE;'
-    );
-    $db->run(
-        'ALTER TABLE `deals_clients` ADD FOREIGN KEY (`client_id`) 
-        REFERENCES `clients`(`client_id`) ON DELETE CASCADE ON UPDATE CASCADE;'
-    );
+    $db->run('SET FOREIGN_KEY_CHECKS = 1;');
+    $db->run('SET UNIQUE_CHECKS = 1;');
 
-    // deals --- contracts
-    $db->run(
-        'ALTER TABLE `deals_contracts` ADD FOREIGN KEY (`deal_id`) 
-        REFERENCES `deals`(`deal_id`) ON DELETE CASCADE ON UPDATE CASCADE;'
-    );
-    $db->run(
-        'ALTER TABLE `deals_contracts` ADD FOREIGN KEY (`contract_id`) 
-        REFERENCES `contracts`(`contract_id`) ON DELETE CASCADE ON UPDATE CASCADE;'
-    );
-
-    // clients --- passports
-    $db->run(
-        'ALTER TABLE `clients_passports` ADD FOREIGN KEY (`client_id`) 
-        REFERENCES `clients`(`client_id`) ON DELETE CASCADE ON UPDATE CASCADE;'
-    );
-    $db->run(
-        'ALTER TABLE `clients_passports` ADD FOREIGN KEY (`passport_id`) 
-        REFERENCES `passports`(`passport_id`) ON DELETE CASCADE ON UPDATE CASCADE;'
-    );
-
-    // deals --- employees
-    $db->run(
-        'ALTER TABLE `deals_employees` ADD FOREIGN KEY (`deal_id`) 
-        REFERENCES `deals`(`deal_id`) ON DELETE CASCADE ON UPDATE CASCADE;'
-    );
-    $db->run(
-        'ALTER TABLE `deals_employees` ADD FOREIGN KEY (`employee_id`) 
-        REFERENCES `employees`(`employee_id`) ON DELETE CASCADE ON UPDATE CASCADE;'
-    );
-
-    // === создание ролей ===
+    // создание ролей
     $admin->createRole('admin');
     $admin->createRole('default');
 
