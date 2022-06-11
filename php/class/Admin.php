@@ -168,13 +168,7 @@ class Admin extends Database {
     }
 
     // установить роль пользователю
-    function setRoleToUser($role, $uuid) {
-        // получение id роли
-        $rows = $this->fetch('SELECT `role_id` FROM roles WHERE role=?', [$role]);
-        if($rows == false) {
-            throw new Exception("Указанная роль '$role' не существует");
-        }
-        $role_id = intval($rows['role_id']);
+    function setRoleIdToUser($role_id, $uuid) {
         // создание записи в БД
         $this->run(
             'INSERT IGNORE INTO roles_employees
@@ -183,6 +177,31 @@ class Admin extends Database {
             [
                 ':uuid' => $uuid,
                 ':role_id' => $role_id
+            ]
+        );
+    }
+
+    // установить роль пользователю
+    function setRoleToUser($role, $uuid) {
+        // получение id роли
+        $rows = $this->fetch('SELECT `role_id` FROM roles WHERE role=?', [$role]);
+        if($rows == false) {
+            throw new Exception("Указанная роль '$role' не существует");
+        }
+        $role_id = intval($rows['role_id']);
+        $this->setRoleIdToUser($role_id, $uuid);
+    }
+
+    // установить должность пользователю
+    function setPositionIdToUser($position_id, $uuid) {
+        // создание записи в БД
+        $this->run(
+            'INSERT IGNORE INTO positions_employees
+            (employee_id, position_id)
+            VALUES (:uuid, :position_id)',
+            [
+                ':uuid' => $uuid,
+                ':position_id' => $position_id
             ]
         );
     }

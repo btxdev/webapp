@@ -1,0 +1,17 @@
+{
+    "-W097": false, // Allow "use strict" at document level
+    "browser": true, // defines globals exposed by modern browsers http://jshint.com/docs/options/#browser
+    "curly": true, // requires you to always put curly braces around blocks in loops and conditionals http://jshint.com/docs/options/#curly
+    "devel": true, // defines globals that are usually used for logging poor-man's debugging: console, alert, etc. http://jshint.com/docs/options/#devel
+    // List global variables (false means read only)
+    "globals": {
+        "globalVar": true
+    },
+    "jquery": false, // This option defines globals exposed by the jQuery JavaScript library.
+    "newcap": false,
+    // List any global functions or const vars
+    "predef": [],
+    "undef": true, // warn about undefined vars
+    "unused": true, // warn about unused vars,
+    "esversion": 7
+}

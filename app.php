@@ -54,6 +54,7 @@ function component($name) {
                 <?php component('contracts'); ?>
                 <?php component('deals'); ?>
                 <?php component('employees'); ?>
+                <?php component('positions'); ?>
                 <?php component('services'); ?>
 
                 </div>
@@ -63,6 +64,7 @@ function component($name) {
                 <?php component('popup/alert'); ?>
                 <?php component('popup/clients'); ?>
                 <?php component('popup/employees'); ?>
+                <?php component('popup/positions'); ?>
                 <?php component('popup/services'); ?>
 
                 </div>
@@ -102,9 +104,9 @@ function component($name) {
                 </ul>
                 <div class="aside-line"></div>
                 <ul class="aside-ul">
-                    <li class="aside-li" onclick="openPage('admin');">
+                    <li class="aside-li" onclick="openPage('positions');">
                         <div class="aside-li__icon"></div>
-                        <div class="aside-li__label">Администрирование</div>
+                        <div class="aside-li__label">Должности</div>
                     </li>
                     <li class="aside-li" onclick="logout();">
                         <div class="aside-li__icon"></div>

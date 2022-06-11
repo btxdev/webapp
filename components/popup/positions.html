@@ -1,0 +1,25 @@
+<!-- Редактировать информацию о должности -->
+<div class="popup" id="popup-position-edit" style="display: none">
+  <div class="popup-title">Должность</div>
+  <table class="popup-table">
+    <tr>
+      <td><span>Наименование</span></td>
+      <td><input type="text" id="position-edit-input" value="Должность" /></td>
+    </tr>
+  </table>
+  <button class="popup-apply" id="position-edit-btn">Сохранить</button>
+  <button class="popup-cancel" onclick="closePopup();">Отмена</button>
+</div>
+
+<!-- Добавить новую должность -->
+<div class="popup" id="popup-position-add" style="display: none">
+  <div class="popup-title">Добавить должность</div>
+  <table class="popup-table">
+    <tr>
+      <td><span>Наименование</span></td>
+      <td><input type="text" id="position-add-input" value="Должность" /></td>
+    </tr>
+  </table>
+  <button class="popup-apply" onclick="addPositionForm();">Добавить</button>
+  <button class="popup-cancel" onclick="closePopup();">Отмена</button>
+</div>
