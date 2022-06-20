@@ -35,6 +35,12 @@ function requireFields($fields) {
         }
     }
 }
+function firstLetter($str) {
+    if(mb_strlen($str) == 0) return '#';
+    $str = mb_substr($str, 0, 1);
+    $str = mb_strtoupper($str);
+    return $str;
+}
 
 // проверка доступа
 $session_name = $settings->get('session_name');
@@ -432,10 +438,8 @@ if(isset($decoded['op'])) {
                 ]
             );
             $client_n1 = $client_data['second_name'];
-            $client_n2 = $client_data['first_name'];
-            if(mb_strlen($client_n2) == 0) $client_n2 = '#';
-            $client_n3 = $client_data['patronymic'];
-            if(mb_strlen($client_n3) == 0) $client_n3 = '#';
+            $client_n2 = firstLetter($client_data['first_name']);
+            $client_n3 = firstLetter($client_data['patronymic']);
             $client_fullname = $client_n1.' '.$client_n2.'. '.$client_n3.'.';
 
             $employee_id = $db->fetch(
@@ -457,10 +461,8 @@ if(isset($decoded['op'])) {
                 ]
             );
             $emp_n1 = $client_data['second_name'];
-            $emp_n2 = $client_data['first_name'];
-            if(mb_strlen($emp_n2) == 0) $emp_n2 = '#';
-            $emp_n3 = $client_data['patronymic'];
-            if(mb_strlen($emp_n3) == 0) $emp_n3 = '#';
+            $emp_n2 = firstLetter($client_data['first_name']);
+            $emp_n3 = firstLetter($client_data['patronymic']);
             $employee_fullname = $emp_n1.' '.$emp_n2.'. '.$emp_n3.'.';
 
             $contract_id = $db->fetch(
