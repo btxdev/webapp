@@ -421,6 +421,7 @@ function updateEmployeeFormOptions() {
       option.text = role['role'];
       $editSelectRole.appendChild(option);
     }
+    //
   });
 }
 
