@@ -304,6 +304,77 @@ if(isset($decoded['op'])) {
         exit($result->json());
     }
 
+    // === недвижимость ===
+
+    if($decoded['op'] == 'get_apartments') {
+        $rows = $db->fetchAll('SELECT * FROM `apartments`');
+        $data = [
+            'status' => 'OK',
+            'apartments' => $rows
+        ];
+        exit(json_encode($data));
+    }
+
+    // if($decoded['op'] == 'get_apartments_data') {
+    //     requireFields(['apartment_id']);
+    //     $apartment = $db->fetch('SELECT * FROM `apartments` WHERE `apartment_id` = :apartment_id', [':apartment_id' => $decoded['apartment_id']]);
+    //     $data = [
+    //         'status' => 'OK',
+    //         'service' => $service
+    //     ];
+    //     exit(json_encode($data));
+    // }
+
+    if($decoded['op'] == 'add_apartment') {
+        requireFields(['address', 'company', 'date', 'price']);
+        $db->run('
+            INSERT INTO `apartments` 
+            (type, address, developer, construction_date, publication_date, price) 
+            VALUES (:type, :address, :developer, :construction_date, :publication_date, :price)', 
+            [
+                ':type' => 'default',
+                ':address' => $decoded['address'],
+                ':developer' => $decoded['company'],
+                ':construction_date' => $decoded['date'],
+                ':publication_date' => date('Y-m-d'),
+                ':price' => $decoded['price']
+            ]);
+        $result = new Status('OK');
+        exit($result->json());
+    }
+
+    // if($decoded['op'] == 'edit_service') {
+    //     requireFields(['service_id', 'service', 'description', 'price']);
+    //     $db->run('
+    //         UPDATE `services` 
+    //         SET `service` = :service, 
+    //         `description` = :description, 
+    //         `price` = :price 
+    //         WHERE `service_id` = :service_id', 
+    //         [
+    //             ':service_id' => $decoded['service_id'],
+    //             ':service' => $decoded['service'],
+    //             ':description' => $decoded['description'],
+    //             ':price' => intval($decoded['price'])
+    //         ]
+    //     );
+    //     $result = new Status('OK');
+    //     exit($result->json());
+    // }
+
+    if($decoded['op'] == 'remove_apartment') {
+        requireFields(['apartment_id']);
+        $db->run('
+            DELETE FROM `apartments` 
+            WHERE apartment_id = :apartment_id', 
+            [
+                ':apartment_id' => $decoded['apartment_id']
+            ]
+        );
+        $result = new Status('OK');
+        exit($result->json());
+    }
+
 }
 
 

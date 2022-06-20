@@ -15,8 +15,10 @@ addEventListener('DOMContentLoaded', () => {
   updateEmployees();
   updatePositions();
   updateServices();
+  updateApartments();
 
-  openPage('employees');
+  // openPage('employees');
+  openPage('apartments');
 });
 
 const POPUP_TIME = 500;
@@ -710,5 +712,97 @@ function removeService(id) {
     },
   }).then(() => {
     updateServices();
+  });
+}
+
+// недвижимость
+
+function updateApartments() {
+  const $container = document.getElementById('apartments-container');
+  sendData({
+    body: {
+      op: 'get_apartments',
+    },
+  }).then(({ apartments }) => {
+    let content = '';
+    if (apartments == false) {
+      content = '<h1 style="margin-left: 50px;">Нет недвижимости</h1>';
+    } else {
+      content += `
+        <tr class="employees-table__title-row">
+          <td style="width: 20px"><div class="title">#</div></td>
+          <td><div class="title">Адрес</div></td>
+          <td><div class="title">Компания</div></td>
+          <td><div class="title">Дата постройки</div></td>
+          <td><div class="title">Стоимость</div></td>
+          <td style="width: 100px"><div class="title"></div></td>
+        </tr>
+      `;
+      for (item of apartments) {
+        content += `
+          <tr>
+            <td style="width: 20px"><div class="field">${item['apartment_id']}</div></td>
+            <td><div class="field">${item['address']}</div></td>
+            <td><div class="field">${item['developer']}</div></td>
+            <td><div class="field">${item['construction_date']}</div></td>
+            <td><div class="field">${item['price']}</div></td>
+            <td style="width: 100px">
+              <button class="table-btn__remove" onclick="removeApartment('${item['apartment_id']}');">Удалить</button>
+            </td>
+          </tr>
+        `;
+      }
+    }
+    $container.innerHTML = content;
+  });
+}
+
+function addApartment(address, company, date, price) {
+  return new Promise((resolve, reject) => {
+    sendData({
+      body: {
+        op: 'add_apartment',
+        address: address,
+        company: company,
+        date: date,
+        price: price,
+      },
+    })
+      .then(() => {
+        resolve();
+      })
+      .catch(() => {
+        reject();
+      });
+  });
+}
+
+function addApartmentForm() {
+  const $address = document.getElementById('input-add-apartment-address');
+  const $company = document.getElementById('input-add-apartment-company');
+  const $date = document.getElementById('input-add-apartment-date');
+  const $price = document.getElementById('input-add-apartment-price');
+  const address = $address.value;
+  const company = $company.value;
+  const date = $date.value;
+  const price = $price.value;
+  addApartment(address, company, date, price)
+    .then(() => {
+      closePopup();
+      updateApartments();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
+
+function removeApartment(id) {
+  sendData({
+    body: {
+      op: 'remove_apartment',
+      apartment_id: id,
+    },
+  }).then(() => {
+    updateApartments();
   });
 }

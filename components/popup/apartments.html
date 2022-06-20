@@ -1,0 +1,26 @@
+<!-- Добавить новой недвижимости -->
+<div class="popup" id="popup-apartment-add" style="display: none">
+  <div class="popup-title">Добавить недвижимость</div>
+  <table class="popup-table">
+    <tr>
+      <td><span>Адрес</span></td>
+      <td><input type="text" value="" id="input-add-apartment-address" /></td>
+    </tr>
+    <tr>
+      <td><span>Компания-застройщик</span></td>
+      <td>
+        <input type="text" value="" id="input-add-apartment-company" />
+      </td>
+    </tr>
+    <tr>
+      <td><span>Дата постройки</span></td>
+      <td><input type="date" value="" id="input-add-apartment-date" /></td>
+    </tr>
+    <tr>
+      <td><span>Стоимость</span></td>
+      <td><input type="text" value="" id="input-add-apartment-price" /></td>
+    </tr>
+  </table>
+  <button class="popup-apply" onclick="addApartmentForm();">Добавить</button>
+  <button class="popup-cancel" onclick="closePopup();">Отмена</button>
+</div>
