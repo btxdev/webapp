@@ -1,5 +1,5 @@
 db_host = 127.0.0.1
-db_user = webapp
+db_user = webapp2
 db_password = qQjmQa&72h7tLYN
 db_dbname = webapp
 db_encoding = utf8mb4
