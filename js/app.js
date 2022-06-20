@@ -977,3 +977,7 @@ function updateDealsFormOptions() {
     }
   });
 }
+
+function openContract(id) {
+  window.open('./docview.php?v=' + String(id), '_blank');
+}
