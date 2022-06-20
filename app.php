@@ -39,8 +39,8 @@ function component($name) {
                     <div class="header__title" id="header-title">Договоры</div>
                     <div class="header__profile">
                         <div class="header__username">admin</div>
-                        <div class="header__line"></div>
-                        <div class="header__name">Иван Петров</div>
+                        <!--<div class="header__line"></div>-->
+                        <div class="header__name"></div>
                         <div class="header__photo1">
                             <div class="header__photo2"></div>
                         </div>

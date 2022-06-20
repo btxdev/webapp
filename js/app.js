@@ -271,7 +271,7 @@ function updateEmployees() {
             <td><div class="field">${item['patronymic']}</div></td>
             <td><div class="field">${item['position']}</div></td>
             <td style="width: 160px">
-                <button onclick="openPopup('popup-employee-edit'); replacePopupData('employees', '${item['id']}');">Подробнее</button>
+                <!--<button onclick="openPopup('popup-employee-edit'); replacePopupData('employees', '${item['id']}');">Подробнее</button>-->
             </td>
             </tr>
         `;
@@ -337,8 +337,6 @@ function updateEmployeeFormOptions() {
       op: 'get_employee_options',
     },
   }).then((serverData) => {
-    console.log('options:');
-    console.log(serverData);
     const positions = serverData['response']['positions'];
     const roles = serverData['response']['roles'];
     $addSelectPosition.innerHTML = '';
@@ -354,6 +352,20 @@ function updateEmployeeFormOptions() {
       option.value = role['role_id'];
       option.text = role['role'];
       $addSelectRole.appendChild(option);
+    }
+    $editSelectPosition.innerHTML = '';
+    for (let position of positions) {
+      let option = document.createElement('option');
+      option.value = position['position_id'];
+      option.text = position['position'];
+      $editSelectPosition.appendChild(option);
+    }
+    $editSelectRole.innerHTML = '';
+    for (let role of roles) {
+      let option = document.createElement('option');
+      option.value = role['role_id'];
+      option.text = role['role'];
+      $editSelectRole.appendChild(option);
     }
   });
 }
