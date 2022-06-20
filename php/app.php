@@ -130,6 +130,8 @@ if(isset($decoded['op'])) {
 
     if($decoded['op'] == 'add_employee') {
 
+        //var_dump($decoded);
+
         requireFields([
             'first_name', 
             'second_name', 
@@ -143,7 +145,10 @@ if(isset($decoded['op'])) {
             'password'
         ]);
 
-        $username = 'temp_'.$db->strgen();
+        
+
+        //$username = $db->strgen();
+        $username = $decoded['username'];
         $first_name = $decoded['first_name'];
         $second_name = $decoded['second_name'];
         $patronymic = $decoded['patronymic'];
@@ -160,6 +165,8 @@ if(isset($decoded['op'])) {
             exit($result->json());
         }
 
+        //echo(123);
+
         $admin->setRoleIdToUser($role_id, $id);
         $admin->setPositionIdToUser($position_id, $id);
 
@@ -174,14 +181,15 @@ if(isset($decoded['op'])) {
             `patronymic` = :patronymic,
             `email` = :email,
             `phone` = :phone 
-            WHERE `uuid` = :id',
+            WHERE `employee_id` = :id',
             [
                 ':username' => $username,
                 ':first_name' => $first_name,
                 ':second_name' => $second_name,
                 ':patronymic' => $patronymic,
                 ':phone' => $phone,
-                ':email' => $email
+                ':email' => $email,
+                ':id' => $id
             ]
         );
 
@@ -210,6 +218,7 @@ if(isset($decoded['op'])) {
         exit($result->json());
     }
 
+    // для select option
     if($decoded['op'] == 'get_employee_options') {
         // get roles
         $roles = $db->fetchAll("SELECT * FROM `roles`");

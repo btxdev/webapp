@@ -14,7 +14,6 @@ addEventListener('DOMContentLoaded', () => {
 
   updateEmployees();
   updatePositions();
-  updateEmployeeFormOptions();
 
   openPage('employees');
 });
@@ -279,6 +278,8 @@ function updateEmployees() {
     }
     $container.innerHTML = content;
   });
+
+  updateEmployeeFormOptions();
 }
 
 function addEmployee(
@@ -293,7 +294,6 @@ function addEmployee(
   username,
   password
 ) {
-  console.log(title, description, link, price, count);
   return new Promise((resolve, reject) => {
     sendData({
       body: {
@@ -317,6 +317,60 @@ function addEmployee(
         reject();
       });
   });
+}
+
+function addEmployeeForm() {
+  const $username = document.getElementById('input-add-employee-username');
+  const $password = document.getElementById('input-add-employee-password');
+  const $name1 = document.getElementById('input-add-employee-name1');
+  const $name2 = document.getElementById('input-add-employee-name2');
+  const $name3 = document.getElementById('input-add-employee-name3');
+  const $position = document.getElementById(
+    'popup-employee-add__select-position'
+  );
+  const $role = document.getElementById('popup-employee-add__select-role');
+  const $birth = document.getElementById('input-add-employee-birth');
+  const $phone = document.getElementById('input-add-employee-phone');
+  const $email = document.getElementById('input-add-employee-email');
+  const first_name = $name1.value;
+  const second_name = $name2.value;
+  const patronymic = $name3.value;
+  const role_id = $role.value;
+  const position_id = $position.value;
+  const birth_date = $birth.value;
+  const phone = $phone.value;
+  const email = $email.value;
+  const username = $username.value;
+  const password = $password.value;
+  addEmployee(
+    first_name,
+    second_name,
+    patronymic,
+    role_id,
+    position_id,
+    birth_date,
+    phone,
+    email,
+    username,
+    password
+  )
+    .then(() => {
+      closePopup();
+      updateEmployees();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  // const $employee = document.getElementById('position-add-input');
+  // const value = $position.value;
+  // addPosition(value)
+  //   .then(() => {
+  //     closePopup();
+  //     updatePositions();
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //   });
 }
 
 function updateEmployeeFormOptions() {
@@ -368,26 +422,6 @@ function updateEmployeeFormOptions() {
       $editSelectRole.appendChild(option);
     }
   });
-}
-
-function addEmployeeForm() {
-  const $selectPosition = document.getElementById(
-    'popup-employee-add__select-position'
-  );
-  const $selectRole = document.getElementById(
-    'popup-employee-add__select-role'
-  );
-
-  // const $employee = document.getElementById('position-add-input');
-  // const value = $position.value;
-  // addPosition(value)
-  //   .then(() => {
-  //     closePopup();
-  //     updatePositions();
-  //   })
-  //   .catch((err) => {
-  //     console.log(err);
-  //   });
 }
 
 // должности

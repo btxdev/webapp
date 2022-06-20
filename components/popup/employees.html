@@ -67,6 +67,16 @@
   <div class="popup-title">Добавить сотрудника</div>
   <table class="popup-table">
     <tr>
+      <td><span>Логин</span></td>
+      <td><input type="text" value="" id="input-add-employee-username" /></td>
+    </tr>
+    <tr>
+      <td><span>Пароль</span></td>
+      <td>
+        <input type="password" value="" id="input-add-employee-password" />
+      </td>
+    </tr>
+    <tr>
       <td><span>Имя</span></td>
       <td><input type="text" value="" id="input-add-employee-name1" /></td>
     </tr>
@@ -115,6 +125,6 @@
       <td><input type="text" value="" id="input-add-employee-email" /></td>
     </tr>
   </table>
-  <button class="popup-apply">Добавить</button>
+  <button class="popup-apply" onclick="addEmployeeForm();">Добавить</button>
   <button class="popup-cancel" onclick="closePopup();">Отмена</button>
 </div>
