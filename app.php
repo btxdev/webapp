@@ -67,6 +67,7 @@ function component($name) {
                 <?php component('popup/positions'); ?>
                 <?php component('popup/services'); ?>
                 <?php component('popup/apartments'); ?>
+                <?php component('popup/deals'); ?>
 
                 </div>
 
@@ -90,7 +91,7 @@ function component($name) {
                         <div class="aside-li__icon"></div>
                         <div class="aside-li__label">Договоры</div>
                     </li>
-                    <li class="aside-li" onclick="openPage('deals');" style="display: none;">
+                    <li class="aside-li" onclick="openPage('deals');">
                         <div class="aside-li__icon"></div>
                         <div class="aside-li__label">Сделки</div>
                     </li>

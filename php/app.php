@@ -375,6 +375,262 @@ if(isset($decoded['op'])) {
         exit($result->json());
     }
 
+    // сделки
+
+    // для select option
+    if($decoded['op'] == 'get_deals_options') {
+        // get services
+        $services = [];
+        $arr = $db->fetchAll("SELECT * FROM `services`");
+        foreach($arr as $item) {
+            array_push($services, [
+                'id' => $item['service_id'],
+                'description' => $item['service']
+            ]);
+        }
+        // get apartments
+        $apartments = [];
+        $arr = $db->fetchAll("SELECT * FROM `apartments`");
+        foreach($arr as $item) {
+            array_push($apartments, [
+                'id' => $item['apartment_id'],
+                'description' => $item['address'].' ('.$item['developer'].')'
+            ]);
+        }
+        //
+        $data = [
+            'status' => 'OK',
+            'response' => [
+                'services' => $services,
+                'apartments' => $apartments
+            ]
+        ];
+        echo(json_encode($data));
+        exit();
+    }
+
+    if($decoded['op'] == 'get_deals') {
+        $rows = $db->fetchAll('SELECT * FROM `deals`');
+        $deals = [];
+        foreach($rows as $item) {
+            $client_id = $db->fetch(
+                "SELECT `client_id` 
+                FROM `clients_deals` 
+                WHERE `deal_id` LIKE :deal_id",
+                [
+                    ':deal_id' => $item['deal_id']
+                ]
+            );
+            if($client_id == false) continue;
+            else $client_id  = $client_id['client_id'];
+            $client_data = $db->fetch(
+                "SELECT * 
+                FROM `clients` 
+                WHERE `client_id` LIKE :client_id",
+                [
+                    ':client_id' => $client_id
+                ]
+            );
+            $client_n1 = $client_data['second_name'];
+            $client_n2 = $client_data['first_name'];
+            if(mb_strlen($client_n2) == 0) $client_n2 = '#';
+            $client_n3 = $client_data['patronymic'];
+            if(mb_strlen($client_n3) == 0) $client_n3 = '#';
+            $client_fullname = $client_n1.' '.$client_n2.'. '.$client_n3.'.';
+
+            $employee_id = $db->fetch(
+                "SELECT `employee_id` 
+                FROM `employees_deals` 
+                WHERE `deal_id` LIKE :deal_id",
+                [
+                    ':deal_id' => $item['deal_id']
+                ]
+            );
+            if($employee_id == false) continue;
+            else $employee_id  = $employee_id['employee_id'];
+            $client_data = $db->fetch(
+                "SELECT * 
+                FROM `employees` 
+                WHERE `employee_id` LIKE :employee_id",
+                [
+                    ':employee_id' => $employee_id
+                ]
+            );
+            $emp_n1 = $client_data['second_name'];
+            $emp_n2 = $client_data['first_name'];
+            if(mb_strlen($emp_n2) == 0) $emp_n2 = '#';
+            $emp_n3 = $client_data['patronymic'];
+            if(mb_strlen($emp_n3) == 0) $emp_n3 = '#';
+            $employee_fullname = $emp_n1.' '.$emp_n2.'. '.$emp_n3.'.';
+
+            $contract_id = $db->fetch(
+                "SELECT `contract_id` 
+                FROM `contracts_deals` 
+                WHERE `deal_id` LIKE :deal_id",
+                [
+                    ':deal_id' => $item['deal_id']
+                ]
+            );
+            if($contract_id == false) continue;
+            else $contract_id  = $contract_id['contract_id'];
+
+            array_push($deals, [
+                'deal_id' => $item['deal_id'],
+                'deal' => $item['deal'],
+                'deal_date' => $item['deal_date'],
+                'client' => $client_fullname,
+                'employee' => $employee_fullname,
+                'contract_id' => $contract_id
+            ]);
+        }
+
+        $data = [
+            'status' => 'OK',
+            'deals' => $deals
+        ];
+        exit(json_encode($data));
+    }
+
+    if($decoded['op'] == 'add_deal') {
+
+        $current_uuid = intval($current_uuid);
+
+        // deal -> deals.deal
+        $deal = $decoded['deal'];
+        // deal.date = date('Y-m-d')
+        $deal_date = date('Y-m-d');
+        // create deal
+        $db->run("
+            INSERT INTO `deals`
+            (deal, deal_date)
+            VALUES (:deal, :deal_date)
+            ",
+            [
+                ':deal' => $deal,
+                ':deal_date' => $deal_date
+            ]
+        );
+        // get deal_id
+        $deal_id = $db->instance->lastInsertId();
+        if($deal_id == false) {
+            $result = new Status('WRONG_FORMAT');
+            exit($result->json());
+        }
+
+        // employees_deals.employee_id = current_uuid
+        // employees_deals.deal_id = deal_id
+        $db->run(
+            "INSERT  INTO `employees_deals`
+            (`employee_id`, `deal_id`)
+            VALUES (:employee_id, :deal_id)",
+            [
+                ':employee_id' => $current_uuid,
+                ':deal_id' => $deal_id
+            ]
+            );
+
+        // services_deals.service_id = service_id
+        // services_deals.deal_id = deal_id
+        $db->run(
+            "INSERT INTO `services_deals`
+            (`service_id`, `deal_id`)
+            VALUES (:service_id, :deal_id)",
+            [
+                ':service_id' => $decoded['service_id'],
+                ':deal_id' => $deal_id
+            ]
+            );
+
+        // create client
+        $db->run(
+            "INSERT INTO `clients`
+            (`first_name`, `second_name`, `patronymic`, `birth_date`, `phone`, `email`, `reg_date`)
+            VALUES (:first_name, :second_name, :patronymic, :birth_date, :phone, :email, :reg_date)",
+            [
+                ':first_name' => $decoded['client_name1'],
+                ':second_name' => $decoded['client_name2'],
+                ':patronymic' => $decoded['client_name3'],
+                ':birth_date' => $decoded['client_birth'],
+                ':phone' => $decoded['client_phone'],
+                ':email' => $decoded['client_email'],
+                ':reg_date' => date('Y-m-d')
+            ]
+            );
+        // get client_id
+        $client_id = $db->instance->lastInsertId();
+        if($client_id == false) {
+            $result = new Status('WRONG_FORMAT');
+            exit($result->json());
+        }
+        // client_deals.client_id = client_id
+        // client_deals.deal_id = deal_id
+        $db->run(
+            "INSERT INTO `clients_deals`
+            (`client_id`, `deal_id`)
+            VALUES (:client_id, :deal_id)",
+            [
+                ':client_id' => $client_id,
+                ':deal_id' => $deal_id
+            ]
+            );
+
+        // create contract
+        $db->run(
+            "INSERT INTO `contracts`
+            (`type`, `date`)
+            VALUES (:type, :date)",
+            [
+                ':type' => 'default',
+                ':date' => date('Y-m-d')
+            ]
+            );
+        // get contract_id
+        $contract_id = $db->instance->lastInsertId();
+        if($contract_id == false) {
+            $result = new Status('WRONG_FORMAT');
+            exit($result->json());
+        }
+        // contracts_deals.contract_id = contract_id
+        // contracts_deals.deal_id = deal_id
+        $db->run(
+            "INSERT INTO `contracts_deals`
+            (`contract_id`, `deal_id`)
+            VALUES (:contract_id, :deal_id)",
+            [
+                ':contract_id' => $contract_id,
+                ':deal_id' => $deal_id
+            ]
+            );
+
+        // apartments_deals.apartment_id = apartment_id
+        // apartments_deals.deal_id = deal_id
+        $db->run(
+            "INSERT INTO `apartments_deals`
+            (`apartment_id`, `deal_id`)
+            VALUES (:apartment_id, :deal_id)",
+            [
+                ':apartment_id' => $decoded['apartment_id'],
+                ':deal_id' => $deal_id
+            ]
+            );
+
+        $result = new Status('OK');
+        exit($result->json());
+    }
+
+    if($decoded['op'] == 'remove_deal') {
+        requireFields(['deal_id']);
+        $db->run('
+            DELETE FROM `deals` 
+            WHERE deal_id = :deal_id', 
+            [
+                ':deal_id' => $decoded['deal_id']
+            ]
+        );
+        $result = new Status('OK');
+        exit($result->json());
+    }
+
 }
 
 

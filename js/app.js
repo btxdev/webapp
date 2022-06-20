@@ -16,9 +16,10 @@ addEventListener('DOMContentLoaded', () => {
   updatePositions();
   updateServices();
   updateApartments();
+  updateDeals();
 
   // openPage('employees');
-  openPage('apartments');
+  openPage('deals');
 });
 
 const POPUP_TIME = 500;
@@ -804,5 +805,175 @@ function removeApartment(id) {
     },
   }).then(() => {
     updateApartments();
+  });
+}
+
+// сделки
+
+function updateDeals() {
+  const $container = document.getElementById('deals-container');
+  sendData({
+    body: {
+      op: 'get_deals',
+    },
+  }).then(({ deals }) => {
+    let content = '';
+    if (deals == false) {
+      content = '<h1 style="margin-left: 50px;">Нет сделок</h1>';
+    } else {
+      content += `
+        <tr class="employees-table__title-row">
+          <td style="width: 20px"><div class="title">#</div></td>
+          <td><div class="title">Сделка</div></td>
+          <td><div class="title">Клиент</div></td>
+          <td><div class="title">Сотрудник</div></td>
+          <td><div class="date">Дата</div></td>
+          <td class="td-btn"><div class="btn">Договор</div></td>
+          <td style="width: 100px"><div class="title"></div></td>
+        </tr>
+      `;
+      for (item of deals) {
+        content += `
+          <tr>
+            <td style="width: 20px"><div class="field">${item['deal_id']}</div></td>
+            <td>
+              <div class="field">${item['deal']}</div>
+            </td>
+            <td><div class="field">${item['client']}</div></td>
+            <td><div class="field">${item['employee']}</div></td>
+            <td><div class="field">${item['deal_date']}</div></td>
+            <td class="td-btn">
+              <div class="btn">
+                <button onclick="openContract('${item['contract_id']}');">Документ</button>
+              </div>
+            </td>
+            <td style="width: 100px">
+              <button class="table-btn__remove" onclick="removeDeal('${item['deal_id']}');">Удалить</button>
+            </td>
+          </tr>
+        `;
+      }
+    }
+    $container.innerHTML = content;
+  });
+
+  updateDealsFormOptions();
+}
+
+function addDeal(
+  deal,
+  serviceId,
+  apartmentId,
+  clientName1,
+  clientName2,
+  clientName3,
+  clientBirth,
+  clientPhone,
+  clientEmail
+) {
+  return new Promise((resolve, reject) => {
+    sendData({
+      body: {
+        op: 'add_deal',
+        deal: deal,
+        service_id: serviceId,
+        apartment_id: apartmentId,
+        client_name1: clientName1,
+        client_name2: clientName2,
+        client_name3: clientName3,
+        client_birth: clientBirth,
+        client_phone: clientPhone,
+        client_email: clientEmail,
+      },
+    })
+      .then(() => {
+        resolve();
+      })
+      .catch(() => {
+        reject();
+      });
+  });
+}
+
+function addDealForm() {
+  const $deal = document.getElementById('input-add-deal-deal');
+  const $service = document.getElementById('select-add-deal__select-service');
+  const $apartment = document.getElementById(
+    'select-add-deal__select-apartment'
+  );
+  const $name1 = document.getElementById('input-add-deal-client-name1');
+  const $name2 = document.getElementById('input-add-deal-client-name2');
+  const $name3 = document.getElementById('input-add-deal-client-name3');
+  const $birth = document.getElementById('input-add-deal-client-birth');
+  const $phone = document.getElementById('input-add-deal-client-phone');
+  const $email = document.getElementById('input-add-deal-client-email');
+  const deal = $deal.value;
+  const serviceId = $service.value;
+  const apartmentId = $apartment.value;
+  const clientName1 = $name1.value;
+  const clientName2 = $name2.value;
+  const clientName3 = $name3.value;
+  const clientBirth = $birth.value;
+  const clientPhone = $phone.value;
+  const clientEmail = $email.value;
+  addDeal(
+    deal,
+    serviceId,
+    apartmentId,
+    clientName1,
+    clientName2,
+    clientName3,
+    clientBirth,
+    clientPhone,
+    clientEmail
+  )
+    .then(() => {
+      closePopup();
+      updateDeals();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
+
+function removeDeal(id) {
+  sendData({
+    body: {
+      op: 'remove_deal',
+      deal_id: id,
+    },
+  }).then(() => {
+    updateDeals();
+  });
+}
+
+function updateDealsFormOptions() {
+  const $addSelectService = document.getElementById(
+    'select-add-deal__select-service'
+  );
+  const $addSelectApartment = document.getElementById(
+    'select-add-deal__select-apartment'
+  );
+  sendData({
+    body: {
+      op: 'get_deals_options',
+    },
+  }).then((serverData) => {
+    const services = serverData['response']['services'];
+    const apartments = serverData['response']['apartments'];
+    $addSelectService.innerHTML = '';
+    for (let service of services) {
+      let option = document.createElement('option');
+      option.value = service['id'];
+      option.text = service['description'];
+      $addSelectService.appendChild(option);
+    }
+    $addSelectApartment.innerHTML = '';
+    for (let apartment of apartments) {
+      let option = document.createElement('option');
+      option.value = apartment['id'];
+      option.text = apartment['description'];
+      $addSelectApartment.appendChild(option);
+    }
   });
 }

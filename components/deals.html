@@ -1,2 +1,51 @@
 <!-- Сделки -->
-<div class="page" id="deals" style="display: none;"></div>
+<div class="page" id="deals" style="display: none">
+  <table class="employees-table deals-table" id="deals-container">
+    <tr class="employees-table__title-row">
+      <td style="width: 20px"><div class="title">#</div></td>
+      <td><div class="title">Сделка</div></td>
+      <td><div class="title">Клиент</div></td>
+      <td><div class="title">Сотрудник</div></td>
+      <td><div class="date">Дата</div></td>
+      <td class="td-btn"><div class="btn">Договор</div></td>
+      <td style="width: 100px"><div class="title"></div></td>
+    </tr>
+    <tr>
+      <td style="width: 20px"><div class="field">1</div></td>
+      <td>
+        <div class="field">Сделка совершена</div>
+      </td>
+      <td><div class="field">Иванов А.А.</div></td>
+      <td><div class="field">Пушкин А.С.</div></td>
+      <td><div class="field">01.01.2022</div></td>
+      <td class="td-btn">
+        <div class="btn">
+          <button>Документ</button>
+        </div>
+      </td>
+      <td style="width: 100px">
+        <button class="table-btn__remove">Удалить</button>
+      </td>
+    </tr>
+    <tr>
+      <td style="width: 20px"><div class="field">1</div></td>
+      <td>
+        <div class="field">Сделка совершена</div>
+      </td>
+      <td><div class="field">Иванов А.А.</div></td>
+      <td><div class="field">Пушкин А.С.</div></td>
+      <td><div class="field">01.01.2022</div></td>
+      <td class="td-btn">
+        <div class="btn">
+          <button>Документ</button>
+        </div>
+      </td>
+      <td style="width: 100px">
+        <button class="table-btn__remove">Удалить</button>
+      </td>
+    </tr>
+  </table>
+  <button class="employees-btn" onclick="openPopup('popup-deal-add')">
+    Создать сделку
+  </button>
+</div>

@@ -1,0 +1,75 @@
+<!-- Добавить новую сделку -->
+<div class="popup" id="popup-deal-add" style="display: none">
+  <div class="popup-title">Создать сделку</div>
+  <table class="popup-table">
+    <tr>
+      <td><span>Описание сделки</span></td>
+      <td><input type="text" value="" id="input-add-deal-deal" /></td>
+    </tr>
+
+    <tr>
+      <td><span>Услуга</span></td>
+      <td>
+        <select
+          name="add-deal-select-service"
+          id="select-add-deal__select-service"
+        >
+          <option value="1">Услуга 1</option>
+          <option value="2">Услуга 2</option>
+          <option value="3">Услуга 3</option>
+        </select>
+      </td>
+    </tr>
+
+    <tr>
+      <td><span>Недвижимость</span></td>
+      <td>
+        <select
+          name="add-deal-select-apartment"
+          id="select-add-deal__select-apartment"
+        >
+          <option value="1">Адрес Застройщик</option>
+          <option value="2">Адрес Застройщик</option>
+          <option value="3">Адрес Застройщик</option>
+        </select>
+      </td>
+    </tr>
+  </table>
+
+  <p class="popup-p">Данные клиента</p>
+
+  <table class="popup-table">
+    <tr>
+      <td><span>Имя</span></td>
+      <td><input type="text" value="" id="input-add-deal-client-name1" /></td>
+    </tr>
+
+    <tr>
+      <td><span>Фамилия</span></td>
+      <td><input type="text" value="" id="input-add-deal-client-name2" /></td>
+    </tr>
+
+    <tr>
+      <td><span>Отчество</span></td>
+      <td><input type="text" value="" id="input-add-deal-client-name3" /></td>
+    </tr>
+
+    <tr>
+      <td><span>Дата рождения</span></td>
+      <td><input type="date" id="input-add-deal-client-birth" /></td>
+    </tr>
+
+    <tr>
+      <td><span>Номер телефона</span></td>
+      <td><input type="text" value="" id="input-add-deal-client-phone" /></td>
+    </tr>
+
+    <tr>
+      <td><span>Адрес электронной почты</span></td>
+      <td><input type="text" value="" id="input-add-deal-client-email" /></td>
+    </tr>
+  </table>
+
+  <button class="popup-apply" onclick="addDealForm();">Сохранить</button>
+  <button class="popup-cancel" onclick="closePopup();">Отмена</button>
+</div>

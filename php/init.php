@@ -36,7 +36,7 @@
         'CREATE TABLE `clients` ( 
             `client_id` INT UNSIGNED NOT NULL AUTO_INCREMENT , 
             `first_name` TINYTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL , 
-            `seconds_name` TINYTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL , 
+            `second_name` TINYTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL , 
             `patronymic` TINYTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL , 
             `birth_date` DATE NOT NULL , 
             `phone` TINYTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL , 
