@@ -200,7 +200,7 @@
     $admin->setRoleToUser('default', $user_uuid);
 
     // присвоение должности Агент пользователю test
-    $admin->setPositionToUser('Агент по недвижимости', $admin_uuid);
+    $admin->setPositionToUser('Агент по недвижимости', $user_uuid);
 
     echo('ok');
 

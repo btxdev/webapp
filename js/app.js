@@ -14,6 +14,7 @@ addEventListener('DOMContentLoaded', () => {
 
   updateEmployees();
   updatePositions();
+  updateEmployeeFormOptions();
 
   openPage('employees');
 });
@@ -231,6 +232,8 @@ function replacePopupData(type, id) {
         });
       });
       break;
+    case 'employees':
+      break;
   }
 }
 
@@ -316,8 +319,63 @@ function addEmployee(
   });
 }
 
+function updateEmployeeFormOptions() {
+  const $addSelectPosition = document.getElementById(
+    'popup-employee-add__select-position'
+  );
+  const $addSelectRole = document.getElementById(
+    'popup-employee-add__select-role'
+  );
+  const $editSelectPosition = document.getElementById(
+    'popup-employee-edit__select-position'
+  );
+  const $editSelectRole = document.getElementById(
+    'popup-employee-edit__select-role'
+  );
+  sendData({
+    body: {
+      op: 'get_employee_options',
+    },
+  }).then((serverData) => {
+    console.log('options:');
+    console.log(serverData);
+    const positions = serverData['response']['positions'];
+    const roles = serverData['response']['roles'];
+    $addSelectPosition.innerHTML = '';
+    for (let position of positions) {
+      let option = document.createElement('option');
+      option.value = position['position_id'];
+      option.text = position['position'];
+      $addSelectPosition.appendChild(option);
+    }
+    $addSelectRole.innerHTML = '';
+    for (let role of roles) {
+      let option = document.createElement('option');
+      option.value = role['role_id'];
+      option.text = role['role'];
+      $addSelectRole.appendChild(option);
+    }
+  });
+}
+
 function addEmployeeForm() {
-  const $first_name = document.getElementById('123');
+  const $selectPosition = document.getElementById(
+    'popup-employee-add__select-position'
+  );
+  const $selectRole = document.getElementById(
+    'popup-employee-add__select-role'
+  );
+
+  // const $employee = document.getElementById('position-add-input');
+  // const value = $position.value;
+  // addPosition(value)
+  //   .then(() => {
+  //     closePopup();
+  //     updatePositions();
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //   });
 }
 
 // должности

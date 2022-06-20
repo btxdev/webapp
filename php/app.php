@@ -210,6 +210,23 @@ if(isset($decoded['op'])) {
         exit($result->json());
     }
 
+    if($decoded['op'] == 'get_employee_options') {
+        // get roles
+        $roles = $db->fetchAll("SELECT * FROM `roles`");
+        // get positions
+        $positions = $db->fetchAll("SELECT * FROM `positions`");
+        //
+        $data = [
+            'status' => 'OK',
+            'response' => [
+                'roles' => $roles,
+                'positions' => $positions
+            ]
+        ];
+        echo(json_encode($data));
+        exit();
+    }
+
 }
 
 
