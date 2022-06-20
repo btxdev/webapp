@@ -310,8 +310,12 @@ function addEmployee(
         password: password,
       },
     })
-      .then(() => {
-        resolve();
+      .then((data) => {
+        if (data.status == 'OK') {
+          resolve();
+        } else {
+          alert('Пользователь уде существует или введены неверные данные');
+        }
       })
       .catch(() => {
         reject();
@@ -354,7 +358,7 @@ function addEmployeeForm() {
     username,
     password
   )
-    .then(() => {
+    .then((serverData) => {
       closePopup();
       updateEmployees();
     })
