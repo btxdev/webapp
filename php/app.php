@@ -236,6 +236,74 @@ if(isset($decoded['op'])) {
         exit();
     }
 
+    // === услуги ===
+
+    if($decoded['op'] == 'get_services') {
+        $rows = $db->fetchAll('SELECT * FROM `services`');
+        $data = [
+            'status' => 'OK',
+            'services' => $rows
+        ];
+        exit(json_encode($data));
+    }
+
+    if($decoded['op'] == 'get_services_data') {
+        requireFields(['service_id']);
+        $service = $db->fetch('SELECT * FROM `services` WHERE `service_id` = :service_id', [':service_id' => $decoded['service_id']]);
+        $data = [
+            'status' => 'OK',
+            'service' => $service
+        ];
+        exit(json_encode($data));
+    }
+
+    if($decoded['op'] == 'add_service') {
+        requireFields(['service', 'description', 'price']);
+        $db->run('
+            INSERT INTO `services` 
+            (service, description, price) 
+            VALUES (:service, :description, :price)', 
+            [
+                ':service' => $decoded['service'],
+                ':description' => $decoded['description'],
+                ':price' => $decoded['price']
+            ]);
+        $result = new Status('OK');
+        exit($result->json());
+    }
+
+    if($decoded['op'] == 'edit_service') {
+        requireFields(['service_id', 'service', 'description', 'price']);
+        $db->run('
+            UPDATE `services` 
+            SET `service` = :service, 
+            `description` = :description, 
+            `price` = :price 
+            WHERE `service_id` = :service_id', 
+            [
+                ':service_id' => $decoded['service_id'],
+                ':service' => $decoded['service'],
+                ':description' => $decoded['description'],
+                ':price' => intval($decoded['price'])
+            ]
+        );
+        $result = new Status('OK');
+        exit($result->json());
+    }
+
+    if($decoded['op'] == 'remove_service') {
+        requireFields(['service_id']);
+        $db->run('
+            DELETE FROM `services` 
+            WHERE service_id = :service_id', 
+            [
+                ':service_id' => $decoded['service_id']
+            ]
+        );
+        $result = new Status('OK');
+        exit($result->json());
+    }
+
 }
 
 

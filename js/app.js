@@ -14,6 +14,7 @@ addEventListener('DOMContentLoaded', () => {
 
   updateEmployees();
   updatePositions();
+  updateServices();
 
   openPage('employees');
 });
@@ -232,6 +233,32 @@ function replacePopupData(type, id) {
       });
       break;
     case 'employees':
+      break;
+    case 'services':
+      sendData({
+        body: {
+          op: 'get_services_data',
+          service_id: id,
+        },
+      }).then((serverResponse) => {
+        const service = serverResponse['service']['service'];
+        const description = serverResponse['service']['description'];
+        const price = serverResponse['service']['price'];
+        const $service = document.getElementById('service-edit-input-service');
+        const $description = document.getElementById(
+          'service-edit-input-description'
+        );
+        const $price = document.getElementById('service-edit-input-price');
+        let $button = document.getElementById('service-edit-btn');
+        $service.value = service;
+        $description.value = description;
+        $price.value = price;
+        removeEventListenersFrom($button);
+        $button = document.getElementById('service-edit-btn');
+        $button.addEventListener('click', (e) => {
+          editServiceForm(id);
+        });
+      });
       break;
   }
 }
@@ -553,5 +580,135 @@ function removePosition(id) {
     },
   }).then(() => {
     updatePositions();
+  });
+}
+
+// услуги
+
+function updateServices() {
+  const $container = document.getElementById('services-container');
+  sendData({
+    body: {
+      op: 'get_services',
+    },
+  }).then(({ services }) => {
+    let content = '';
+    if (services == false) {
+      content = '<h1 style="margin-left: 50px;">Нет услуг</h1>';
+    } else {
+      content += `
+          <tr class="employees-table__title-row">
+            <td style="width: 20px"><div class="title">#</div></td>
+            <td><div class="title">Наименование услуги</div></td>
+            <td><div class="title">Стоимость</div></td>
+            <td style="width: 160px"><div class="title"></div></td>
+            <td style="width: 100px"><div class="title"></div></td>
+          </tr>
+      `;
+      for (item of services) {
+        content += `
+          <tr>
+            <td style="width: 20px"><div class="field">${item['service_id']}</div></td>
+            <td><div class="field">${item['service']}</div></td>
+            <td><div class="field">${item['price']}</div></td>
+            <td style="width: 160px">
+              <button onclick="openPopup('popup-service-edit'); replacePopupData('services', '${item['service_id']}');">
+                Редактировать
+              </button>
+            </td>
+            <td style="width: 100px">
+              <button class="table-btn__remove" onclick="removeService('${item['service_id']}');">Удалить</button>
+            </td>
+          </tr>
+        `;
+      }
+    }
+    $container.innerHTML = content;
+  });
+}
+
+function addService(service, description, price) {
+  return new Promise((resolve, reject) => {
+    sendData({
+      body: {
+        op: 'add_service',
+        service: service,
+        description: description,
+        price: price,
+      },
+    })
+      .then(() => {
+        resolve();
+      })
+      .catch(() => {
+        reject();
+      });
+  });
+}
+
+function addServiceForm() {
+  const $service = document.getElementById('service-add-input-service');
+  const $description = document.getElementById('service-add-input-description');
+  const $price = document.getElementById('service-add-input-price');
+  const service = $service.value;
+  const description = $description.value;
+  const price = $price.value;
+  addService(service, description, price)
+    .then(() => {
+      closePopup();
+      updateServices();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
+
+function editService(id, service, description, price) {
+  return new Promise((resolve, reject) => {
+    sendData({
+      body: {
+        op: 'edit_service',
+        service_id: id,
+        service: service,
+        description: description,
+        price: price,
+      },
+    })
+      .then(() => {
+        resolve();
+      })
+      .catch(() => {
+        reject();
+      });
+  });
+}
+
+function editServiceForm(id) {
+  const $service = document.getElementById('service-edit-input-service');
+  const $description = document.getElementById(
+    'service-edit-input-description'
+  );
+  const $price = document.getElementById('service-edit-input-price');
+  const service = $service.value;
+  const description = $description.value;
+  const price = $price.value;
+  editService(id, service, description, price)
+    .then(() => {
+      closePopup();
+      updateServices();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
+
+function removeService(id) {
+  sendData({
+    body: {
+      op: 'remove_service',
+      service_id: id,
+    },
+  }).then(() => {
+    updateServices();
   });
 }

@@ -36,7 +36,7 @@ function component($name) {
         <div class="container">
             <main>
                 <div class="header">
-                    <div class="header__title" id="header-title">Договоры</div>
+                    <div class="header__title" id="header-title">Загрузка...</div>
                     <div class="header__profile">
                         <div class="header__username">admin</div>
                         <!--<div class="header__line"></div>-->
@@ -89,15 +89,15 @@ function component($name) {
                         <div class="aside-li__icon"></div>
                         <div class="aside-li__label">Договоры</div>
                     </li>
-                    <li class="aside-li" onclick="openPage('deals');">
+                    <li class="aside-li" onclick="openPage('deals');" style="display: none;">
                         <div class="aside-li__icon"></div>
                         <div class="aside-li__label">Сделки</div>
                     </li>
-                    <li class="aside-li" onclick="openPage('apartments');">
+                    <li class="aside-li" onclick="openPage('apartments');" style="display: none;">
                         <div class="aside-li__icon"></div>
                         <div class="aside-li__label">Недвижимость</div>
                     </li>
-                    <li class="aside-li" onclick="openPage('clients');">
+                    <li class="aside-li" onclick="openPage('clients');" style="display: none;">
                         <div class="aside-li__icon"></div>
                         <div class="aside-li__label">Клиенты</div>
                     </li>
