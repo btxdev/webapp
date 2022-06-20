@@ -191,17 +191,20 @@ if(isset($decoded['op'])) {
     }
 
     if($decoded['op'] == 'get_employees') {
-        $rows = $db->fetchAll("SELECT * FROM `employees` INNER JOIN `positions`");
+        $rows = $db->fetchAll("SELECT * FROM `employees`");
         $users = [];
         foreach ($rows as $row) {
-            array_push($users, [
+            $users[$row['employee_id']] = [
                 'id' => $row['employee_id'],
                 'first_name' => $row['first_name'],
                 'second_name' => $row['second_name'],
                 'patronymic' => $row['patronymic'],
-                'phone' => $row['phone'],
-                'reg_date' => $row['reg_date']
-            ]);
+                'position' => null,
+            ];
+        }
+        $rows = $db->fetchAll("SELECT employee_id, position FROM `positions_employees` INNER JOIN `positions` WHERE positions_employees.position_id = positions.position_id");
+        foreach ($rows as $row) {
+            $users[$row['employee_id']]['position'] = $row['position'];
         }
         $result = new Status('OK', ['msg' => $users]);
         exit($result->json());

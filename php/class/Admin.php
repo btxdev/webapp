@@ -167,6 +167,11 @@ class Admin extends Database {
         $this->run('DELETE IGNORE FROM roles WHERE role=?', [$role]);
     }
 
+    // создать должность
+    function createPosition($position) {
+        $this->run('INSERT IGNORE INTO positions (position) VALUES (?)', [$position]);
+    }
+
     // установить роль пользователю
     function setRoleIdToUser($role_id, $uuid) {
         // создание записи в БД
@@ -204,6 +209,17 @@ class Admin extends Database {
                 ':position_id' => $position_id
             ]
         );
+    }
+
+    // установить должность пользователю
+    function setPositionToUser($position, $uuid) {
+        // получение id должности
+        $rows = $this->fetch('SELECT `position_id` FROM positions WHERE position=?', [$position]);
+        if($rows == false) {
+            throw new Exception("Указанная должность '$position' не существует");
+        }
+        $position_id = intval($rows['position_id']);
+        $this->setPositionIdToUser($position_id, $uuid);
     }
 
 }

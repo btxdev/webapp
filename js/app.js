@@ -12,7 +12,10 @@ addEventListener('DOMContentLoaded', () => {
   //   updateUsers();
   //   updateOrders();
 
+  updateEmployees();
   updatePositions();
+
+  openPage('employees');
 });
 
 const POPUP_TIME = 500;
@@ -233,6 +236,48 @@ function replacePopupData(type, id) {
 
 // сотрудники
 
+function updateEmployees() {
+  const $container = document.getElementById('employees-container');
+  sendData({
+    body: {
+      op: 'get_employees',
+    },
+  }).then((serverData) => {
+    const employees = serverData['msg'];
+    let content = '';
+    if (employees == false) {
+      content = '<h1 style="margin-left: 50px;">Нет пользователей</h1>';
+    } else {
+      content += `
+        <tr class="employees-table__title-row">
+        <td style="width: 20px"><div class="title">#</div></td>
+        <td><div class="title">Имя</div></td>
+        <td><div class="title">Фамилия</div></td>
+        <td><div class="title">Отчество</div></td>
+        <td><div class="title">Должность</div></td>
+        <td style="width: 160px"><div class="title"></div></td>
+        </tr>
+    `;
+      for (id in employees) {
+        const item = employees[id];
+        content += `
+            <tr>
+            <td style="width: 20px"><div class="field">${item['id']}</div></td>
+            <td><div class="field">${item['first_name']}</div></td>
+            <td><div class="field">${item['second_name']}</div></td>
+            <td><div class="field">${item['patronymic']}</div></td>
+            <td><div class="field">${item['position']}</div></td>
+            <td style="width: 160px">
+                <button onclick="openPopup('popup-employee-edit'); replacePopupData('employees', '${item['id']}');">Подробнее</button>
+            </td>
+            </tr>
+        `;
+      }
+    }
+    $container.innerHTML = content;
+  });
+}
+
 function addEmployee(
   first_name,
   second_name,
@@ -285,7 +330,6 @@ function updatePositions() {
     },
   }).then(({ positions }) => {
     //const positions = serverData['positions'];
-    console.log(positions);
     let content = '';
     if (positions == false) {
       content = '<h1 style="margin-left: 50px;">Нет должностей</h1>';

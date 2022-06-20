@@ -177,18 +177,31 @@
     $admin->createRole('admin');
     $admin->createRole('default');
 
+    // создание должностей
+    $admin->createPosition('Администратор');
+    $admin->createPosition('Директор');
+    $admin->createPosition('Главный бухгалтер');
+    $admin->createPosition('Бухгалтер');
+    $admin->createPosition('Агент по недвижимости');
+
     // создание пользователя admin
     $admin_uuid = $admin->createUser('admin', 'r00tPassw0rd');
 
     // присвоение роли admin пользователю admin
     $admin->setRoleToUser('admin', $admin_uuid);
 
+    // присвоение должности Администратор пользователю admin
+    $admin->setPositionToUser('Администратор', $admin_uuid);
+
     // создание пользователя test
     $user_uuid = $admin->createUser('test', '123456');
 
     // присвоение роли default пользователю test
     $admin->setRoleToUser('default', $user_uuid);
-    
+
+    // присвоение должности Агент пользователю test
+    $admin->setPositionToUser('Агент по недвижимости', $admin_uuid);
+
     echo('ok');
 
 ?>
